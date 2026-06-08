@@ -57,6 +57,7 @@ export default defineConfig({
             { label: 'What is Rook', slug: 'start/what-is-rook' },
             { label: 'Install Rook', slug: 'start/install' },
             { label: 'Set Up & Verify', slug: 'start/setup-verify' },
+            { label: 'Post-Install Agent Setup', slug: 'start/agent-post-install' },
             { label: 'Your First Conversation', slug: 'start/first-conversation' },
           ],
         },

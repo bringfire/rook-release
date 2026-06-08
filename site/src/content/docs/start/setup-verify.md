@@ -10,6 +10,8 @@ installer and restarted Rhino, paste the block below into Claude Code (or your
 MCP-capable assistant) and let it confirm everything is wired up — the start of
 working with Rook agent-first.
 
+For a full post-install check your agent can run end-to-end, see [Post-Install Agent Setup](/rook-release/start/agent-post-install/).
+
 :::tip[Paste this to your agent]
 ```text
 You're helping me verify a fresh Rook installation (the Rhino + Grasshopper
