@@ -3,8 +3,8 @@
 <p align="center"><strong>AI agents for Rhino&nbsp;3D and Grasshopper.</strong></p>
 
 <p align="center">
-  Operate Rhino and Grasshopper by talking to your AI assistant — close to 400
-  specialized tools for geometry, analysis, scripting, layers, blocks, documents,
+  Operate Rhino and Grasshopper by talking to your AI assistant — nearly 400 MCP
+  tools for geometry, analysis, scripting, layers, blocks, documents,
   vision, BIM, and more.
 </p>
 

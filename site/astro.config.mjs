@@ -18,7 +18,7 @@ export default defineConfig({
     starlight({
       title: 'Rook',
       description:
-        'AI agents for Rhino 3D and Grasshopper. 392 MCP tools. Works with any LLM provider.',
+        'AI agents for Rhino 3D and Grasshopper. Nearly 400 MCP tools. Works with any LLM provider.',
       logo: {
         light: './src/assets/rook-raven.svg',
         dark: './src/assets/rook-raven.svg',

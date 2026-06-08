@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-Rook gives your AI assistant **close to 400 specialized tools** for operating Rhino
+Rook gives your AI assistant **nearly 400 specialized tools** for operating Rhino
 3D and Grasshopper — and they go deep. Geometry creation and analysis, complex
 scripted operations, full Grasshopper definitions, layers, blocks, materials, and
 whole-document workflows: if Rhino and Grasshopper can do it, there's very likely a
