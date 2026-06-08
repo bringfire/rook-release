@@ -17,7 +17,7 @@ that carries through: it survives long sessions and makes the plan explicit
 | **I · Design** | `/design-grasshopper` | **Explore.** Reads the knowledge store and your scene, asks clarifying questions, and produces a validated design document. |
 | **II · Plan** | `/plan-grasshopper` | **Commit.** Turns the design into exact, ordered build steps — component lookups and canvas positions pinned. |
 | **III · Execute** | `/execute-grasshopper` | **Build.** Runs the plan in small batches, checking status and errors every few components. |
-| **IV · Consolidate** | `/consolidate` | **Remember.** Folds what was learned during the build back into the [knowledge graph](/rook-release/modules/knowledge-graph/). |
+| **IV · Consolidate** | _(automatic)_ | **Remember.** Rook records what it learned during the build into the [knowledge graph](/rook-release/modules/knowledge-graph/) — nothing to run. |
 
 ## Why phases
 

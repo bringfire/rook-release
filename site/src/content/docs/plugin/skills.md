@@ -17,8 +17,8 @@ too; other MCP clients get the tools but not the skills. See
 
 ## Grasshopper — the design cascade
 
-The three phases that take a definition from idea to canvas. See
-[The Design Cascade](/rook-release/modules/design-cascade/).
+The three skills that take a definition from idea to canvas (Rook records what it
+learns automatically). See [The Design Cascade](/rook-release/modules/design-cascade/).
 
 | Skill | What it does |
 |-------|--------------|
