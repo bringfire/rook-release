@@ -27,6 +27,15 @@ a client with the skills also *knows the workflows*.
 The plugin is declared in `.claude-plugin/plugin.json` and published through
 `.claude-plugin/marketplace.json` in the [Rook repository](https://github.com/bringfire/rook-release).
 
+:::note[Two different "agent" layers]
+**Rook's built-in multi-agent fleet** — the planner / worker / conductor
+orchestration that spawns background agents — lives in the **MCP/runtime layer** and
+works for any MCP-capable client (see [Multi-Agent](/rook-release/modules/multi-agent/)).
+That is separate from **Claude Code subagent definition files**: the public plugin
+ships **user skills and a session hook**; private development subagents (internal
+review/audit agents) are **not** shipped.
+:::
+
 ## How it gets installed
 
 There are two distinct steps with different delivery channels:
@@ -55,8 +64,8 @@ skills appear under `/`.
 
 ## Which clients get what
 
-| Client | MCP tools | Skills | Hooks / Plugins / Agents |
-|--------|:---------:|:------:|:------------------------:|
+| Client | MCP tools | Skills | Session hook |
+|--------|:---------:|:------:|:------------:|
 | **Claude Code** (CLI / Desktop / VS Code) | ✅ | ✅ (marketplace plugin) | ✅ |
 | **Codex CLI** | ✅ | ✅ (curated, 11; installer-delivered) | — |
 | **Cursor / Windsurf** | ✅ | — | — |
