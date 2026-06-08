@@ -14,7 +14,7 @@ Codex and other MCP clients use Rook's MCP tools. The curated skill workflow shi
 | **Windsurf** | ✅ | — | — |
 | **Any MCP client** | ✅ | — | — |
 
-Hooks, Claude Code plugins, and Claude subagents remain Claude-only.
+Hooks and Claude Code plugins remain Claude-only.
 
 ## Codex CLI
 

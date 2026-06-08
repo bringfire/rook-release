@@ -87,6 +87,6 @@ standards, then use /clean-layers to bring my working file into line with them.
 ## How skills compose
 
 The real power is chaining them. The Grasshopper cascade is the canonical example —
-`design → plan → execute → consolidate` — but you can mix freely: capture a
-convention, clean a file to match, then design new geometry on the tidy base. Just
-describe the end-to-end goal and let your agent sequence the skills.
+`design → plan → execute` — Rook records what it learns automatically. You can mix
+freely: capture a convention, clean a file to match, then design new geometry on the
+tidy base. Just describe the end-to-end goal and let your agent sequence the skills.

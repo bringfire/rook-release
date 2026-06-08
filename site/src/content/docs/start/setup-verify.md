@@ -18,7 +18,7 @@ You're helping me verify a fresh Rook installation (the Rhino + Grasshopper
 plugin). Please run these checks in order and report what you find:
 
 1. Connection — list your MCP servers and confirm "rook" is present. It should
-   expose a large set of tools (250+). If it's missing, tell me — the MCP config
+   expose a large set of tools (nearly 400). If it's missing, tell me — the MCP config
    may not be registered.
 
 2. Live Rhino — make sure Rhino 8 is running, then call rhino_ping. You should get
@@ -46,7 +46,7 @@ any gaps. The rest of this page explains what those checks mean.
 
 ### 1. The MCP connection
 Rook reaches your assistant through an **MCP server** named `rook`. When you run
-`/mcp` (or your agent lists its servers), `rook` should appear with 250+ tools. If
+`/mcp` (or your agent lists its servers), `rook` should appear with nearly 400 tools. If
 it's missing, the MCP configuration wasn't registered — re-run the installer, or
 see [Claude Code & Desktop](/rook-release/plugin/claude/) for manual setup.
 

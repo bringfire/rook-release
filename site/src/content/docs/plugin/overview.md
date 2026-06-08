@@ -1,13 +1,13 @@
 ---
 title: Plugin Overview
-description: Rook ships as a Claude Code plugin — skills, hooks, and agents — on top of its MCP server.
+description: Rook ships as a Claude Code plugin — skills and hooks — on top of its MCP server.
 sidebar:
   order: 1
 ---
 
 Rook is two things working together:
 
-1. **An MCP server** — the ~250+ tools your assistant uses to operate Rhino and
+1. **An MCP server** — the nearly 400 MCP tools your assistant uses to operate Rhino and
    Grasshopper. Any MCP-capable client gets these.
 2. **Skills and hooks** — guided workflows that turn those tools into coherent design
    sessions. This is the part that makes Rook feel like it knows how to design, not

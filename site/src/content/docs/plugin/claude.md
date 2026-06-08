@@ -6,7 +6,7 @@ sidebar:
 ---
 
 **Claude Code is the recommended client** — and the only one that gets *everything*:
-MCP tools, skills, hooks, and subagents.
+MCP tools, skills, and hooks.
 
 :::caution[Claude Code ≠ the old Claude Desktop chat app]
 "Claude Code" (the [CLI](https://code.claude.com/docs/en/overview),

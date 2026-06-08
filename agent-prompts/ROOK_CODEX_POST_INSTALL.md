@@ -1,9 +1,10 @@
 You're helping me finish setting up Rook (the Rhino + Grasshopper plugin) right
 after installing it. Run these checks in order, then clean up and report.
 
-1. MCP connection — list your MCP servers; confirm "rook" is present with a large
-   tool set (nearly 400). If missing, tell me (the installer registers it; I may
-   need to restart you).
+1. MCP connection — list your MCP servers or inspect your available MCP tools (if
+   your client can't list servers, just try rhino_ping). Confirm "rook" is present
+   with a large tool set (nearly 400). If missing, tell me (the installer registers
+   it; I may need to restart you).
 2. Rhino — make sure Rhino 8 is running, then call rhino_ping; expect "pong". If it
    fails, remind me to start Rhino and that the RookNative plugin must be loaded
    (I can run ShowRookChat in Rhino to check).
