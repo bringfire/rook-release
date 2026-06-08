@@ -8,6 +8,6 @@
   "repository": "https://github.com/bringfire/rook-release",
   "license": "All Rights Reserved",
   "keywords": ["rhino", "grasshopper", "3d", "cad", "mcp", "rook", "architecture"],
-  "skills": "../.claude/skills/",
-  "hooks": "../hooks/hooks.json"
+  "skills": "./.claude/skills/",
+  "hooks": "./hooks/hooks.json"
 }
