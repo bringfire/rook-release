@@ -21,13 +21,13 @@ install [Claude Code](https://code.claude.com/docs/en/desktop-quickstart) instea
 
 ## The easy path
 
-Run the Rook installer ([Install Rook](/rook-release/start/install/)). It registers the MCP
-server for Claude Code automatically and copies the skills, agents, and hooks into
-place. Restart Rhino, then [verify](/rook-release/start/setup-verify/).
+There are two steps:
 
-## Loading the plugin
+1. **Run the Rook installer** ([Install Rook](/rook-release/start/install/)). It sets up the
+   Rhino plug-ins and the local MCP server, and registers the MCP server for Claude Code
+   automatically. Restart Rhino after this step.
 
-To manage Rook as a Claude Code plugin (so skills and hooks stay updatable):
+2. **Add the marketplace plugin** to get the skills and session-start hook in Claude Code:
 
 :::tip[Paste this to your agent]
 ```text
@@ -35,6 +35,12 @@ To manage Rook as a Claude Code plugin (so skills and hooks stay updatable):
 /plugin install rook@rook
 ```
 :::
+
+This provides the `/` skills and the session hook. Then [verify](/rook-release/start/setup-verify/).
+
+## Loading the plugin manually
+
+If you need to re-add or update the plugin at any time:
 
 ## Manual MCP configuration
 

@@ -29,8 +29,8 @@ plugin). Please run these checks in order and report what you find:
 
 4. Skills (Claude Code only) — check whether the Rook skills are available (for
    example /design-grasshopper, /chirp, /design-road). If they aren't, the Rook
-   plugin may not be installed as a Claude Code plugin yet — walk me through
-   adding it.
+   marketplace plugin may not be installed yet — walk me through running
+   `/plugin marketplace add bringfire/rook-release` then `/plugin install rook@rook`.
 
 Give me a short PASS/FAIL summary for each step, and for anything that failed,
 the most likely cause and the fix.
@@ -68,10 +68,14 @@ your agent → MCP server (Python) → HTTP bridge → RookNative (C++) → Rhin
 If the sphere appears, every layer is working.
 
 ### 4. The skills (Claude Code only)
-Skills like `/design-grasshopper` and `/chirp` come from the **Rook Claude Code
-plugin**, not the MCP server. If your agent has the tools but not the skills, the
-plugin isn't installed as a plugin yet — see
-[Plugin Overview](/rook-release/plugin/overview/) for how to add it.
+Skills like `/design-grasshopper` and `/chirp` come from the **Rook marketplace
+plugin** ([Plugin Overview](/rook-release/plugin/overview/)), not the MCP server. If
+your agent has the tools but not the skills, the plugin isn't installed yet — run
+`/plugin marketplace add bringfire/rook-release` then `/plugin install rook@rook` in
+Claude Code.
+
+**Codex users:** the curated skills are delivered by the installer to `~/.codex/skills`
+— no marketplace step needed.
 
 ## Troubleshooting
 
@@ -81,7 +85,7 @@ plugin isn't installed as a plugin yet — see
 | `rhino_ping` errors | Rhino not running, or plugin not loaded | Start Rhino 8; run `ShowRookChat` to confirm the plugin |
 | "Connection refused" | Plugin port not discovered | Check `%TEMP%\rook\` for discovery JSON files |
 | Tools time out | Rhino is showing a modal dialog | Dismiss the dialog in Rhino, then retry |
-| Tools work but no skills | Plugin not installed in Claude Code | [Install the plugin](/rook-release/plugin/overview/) |
+| Tools work but no skills | Marketplace plugin not installed (Claude Code) | Run `/plugin marketplace add bringfire/rook-release` then `/plugin install rook@rook` — see [Plugin Overview](/rook-release/plugin/overview/) |
 
 ## Next
 

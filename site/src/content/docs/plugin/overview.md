@@ -9,12 +9,12 @@ Rook is two things working together:
 
 1. **An MCP server** — the ~250+ tools your assistant uses to operate Rhino and
    Grasshopper. Any MCP-capable client gets these.
-2. **A Claude Code plugin** — the *skills* and *hooks* that turn those
-   tools into guided workflows. This is the part that makes Rook feel like it knows
-   how to design, not just how to click.
+2. **Skills and hooks** — guided workflows that turn those tools into coherent design
+   sessions. This is the part that makes Rook feel like it knows how to design, not
+   just how to click.
 
 Understanding the split matters: a client with only the MCP server can *do* things;
-a client with the plugin also *knows the workflows*.
+a client with the skills also *knows the workflows*.
 
 ## What's in the plugin
 
@@ -29,14 +29,14 @@ The plugin is declared in `.claude-plugin/plugin.json` and published through
 
 ## How it gets installed
 
-### The installer does most of it
-The Windows installer copies the skills, agents, and hooks into place and registers
-the MCP server for Claude Code, Claude Desktop, and Codex. For many users, that's
-all that's needed — see [Install Rook](/rook-release/start/install/).
+There are two distinct steps with different delivery channels:
 
-### Loading it as a Claude Code plugin
-Because Rook publishes a marketplace manifest, you can also add it as a managed
-Claude Code plugin, which keeps skills and hooks updatable:
+**Step 1 — The installer** sets up the Rhino plug-ins and the local MCP server, and
+registers it with your assistant. It also copies the curated skill set to `~/.codex/skills`
+for Codex users. See [Install Rook](/rook-release/start/install/).
+
+**Step 2 — The marketplace plugin (Claude Code only)** delivers the skills and the
+session-start hook to Claude Code. Run these two commands in Claude Code after the installer:
 
 :::tip[Paste this to your agent (Claude Code)]
 ```text
@@ -57,8 +57,8 @@ skills appear under `/`.
 
 | Client | MCP tools | Skills | Hooks / Plugins / Agents |
 |--------|:---------:|:------:|:------------------------:|
-| **Claude Code** (CLI / Desktop / VS Code) | ✅ | ✅ | ✅ |
-| **Codex CLI** | ✅ | ✅ (packaged set) | — |
+| **Claude Code** (CLI / Desktop / VS Code) | ✅ | ✅ (marketplace plugin) | ✅ |
+| **Codex CLI** | ✅ | ✅ (curated, 11; installer-delivered) | — |
 | **Cursor / Windsurf** | ✅ | — | — |
 | **Old Claude Desktop chat app** | ✅ | — | — |
 

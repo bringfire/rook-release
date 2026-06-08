@@ -5,23 +5,24 @@ sidebar:
   order: 4
 ---
 
-Rook works with any MCP-capable client. What you get depends on the client.
+Codex and other MCP clients use Rook's MCP tools. The curated skill workflow ships to Claude Code via the marketplace plugin and to Codex via the installer (the same 11 user skills). Maintainer/dev-only skills ship to neither client.
 
 | Client | MCP tools | Skills | Hooks / Plugins / Agents |
 |--------|:---------:|:------:|:------------------------:|
-| **Codex CLI** | ✅ | ✅ (packaged set) | — |
+| **Codex CLI** | ✅ | ✅ (curated, 11; installer-delivered) | — |
 | **Cursor** | ✅ | — | — |
 | **Windsurf** | ✅ | — | — |
 | **Any MCP client** | ✅ | — | — |
 
-Skills marked ✅ for Codex come from Rook's packaged skill set (`.agents/skills/`).
 Hooks, Claude Code plugins, and Claude subagents remain Claude-only.
 
 ## Codex CLI
 
 ### The easy path
-Run the installer with Codex support — it generates a user-level
-`~/.codex/config.toml` and copies the packaged skills. See
+Run the Rook installer — it sets up the Rhino plug-ins, the local MCP server,
+generates a user-level `~/.codex/config.toml`, and copies the curated 11 user
+skills to `~/.codex/skills`. It also installs `AGENTS.md` with Rook's operating
+guidance. No extra step needed for skills. See
 [Install Rook](/rook-release/start/install/).
 
 ### Manual configuration

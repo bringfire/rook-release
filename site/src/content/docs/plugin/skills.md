@@ -10,9 +10,10 @@ into multi-step processes — designing a Grasshopper definition, building a roa
 network, organizing a file. Rook ships **11** of them.
 
 :::note
-Skills come with the **Claude Code plugin**. Codex CLI gets the packaged skill set
-too; other MCP clients get the tools but not the skills. See
-[Plugin Overview](/rook-release/plugin/overview/).
+Skills reach **Claude Code** via the marketplace plugin (`/plugin marketplace add bringfire/rook-release`
+→ `/plugin install rook@rook`). **Codex CLI** gets the same curated 11 user skills
+installed by the installer (`~/.codex/skills`). Other MCP clients get the tools but
+not the skills. See [Plugin Overview](/rook-release/plugin/overview/).
 :::
 
 ## Grasshopper — the design cascade

@@ -54,7 +54,20 @@ assistant reach into Rhino. You point your assistant at Rook once.
 See [Claude Code & Desktop](/rook-release/plugin/claude/) and
 [Codex & Other Clients](/rook-release/plugin/codex/) for per-client details.
 
-## Step 3 — Verify
+## Step 3 — Add the Rook plugin (Claude Code)
+
+To get the `/` skills and the session hook in **Claude Code**, add the marketplace plugin:
+
+```text
+/plugin marketplace add bringfire/rook-release
+/plugin install rook@rook
+```
+
+This provides the `/` skills + the session hook **for Claude Code**.
+
+**Codex users:** the curated skills are installed for you by the installer — no extra step.
+
+## Step 4 — Verify
 
 Hand your agent the [Set Up & Verify](/rook-release/start/setup-verify/) page — it
 checks the connection, the live Rhino bridge, and the skills.
