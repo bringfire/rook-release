@@ -9,11 +9,6 @@ Grasshopper is full of repetitive setup — placing components, wiring them,
 relabelling, cleaning up a tangled canvas. Rook handles that side so you can focus
 on the logic of your definition.
 
-:::caution[Placeholder]
-This page is a scaffold. Expand with worked examples and screenshots before
-publishing.
-:::
-
 ## Scaffold a definition
 
 > “Set up a sphere driven by a radius slider, then I'll build from there.”

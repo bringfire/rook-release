@@ -9,11 +9,6 @@ sidebar:
 your definition. They take data in, think it through, and pass structured results
 on — so a definition can make judgement calls, not just calculations.
 
-:::caution[Placeholder]
-This page is a scaffold. Expand with example cascades and screenshots before
-publishing.
-:::
-
 ## What they're for
 
 Some steps in a design aren't pure geometry — they're decisions. *Which option

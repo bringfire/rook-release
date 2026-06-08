@@ -120,10 +120,6 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Showcase',
-          items: [{ label: 'Gallery', slug: 'showcase/gallery' }],
-        },
-        {
           label: 'Going Deeper',
           items: [
             { label: 'Under the Hood', slug: 'deeper/under-the-hood' },

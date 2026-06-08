@@ -9,11 +9,6 @@ sidebar:
 categories, and parameters that carry information beyond raw geometry. It's built
 for interrogating and organizing a model, not authoring it from scratch.
 
-:::caution[Placeholder]
-This page is a scaffold. Confirm exact capabilities and supported workflows before
-publishing.
-:::
-
 ## What it's for
 
 BIM models are dense with structured data. Pulling answers out of them by hand is
