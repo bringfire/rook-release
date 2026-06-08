@@ -7,7 +7,7 @@ sidebar:
 
 Skills are guided workflows you trigger with `/`. They orchestrate Rook's tools
 into multi-step processes — designing a Grasshopper definition, building a road
-network, organizing a file. Rook ships **15** of them.
+network, organizing a file. Rook ships **11** of them.
 
 :::note
 Skills come with the **Claude Code plugin**. Codex CLI gets the packaged skill set
@@ -17,7 +17,7 @@ too; other MCP clients get the tools but not the skills. See
 
 ## Grasshopper — the design cascade
 
-The four phases that take a definition from idea to canvas. See
+The three phases that take a definition from idea to canvas. See
 [The Design Cascade](/rook-release/modules/design-cascade/).
 
 | Skill | What it does |
@@ -25,7 +25,6 @@ The four phases that take a definition from idea to canvas. See
 | `/design-grasshopper` | Explore the idea, ask questions, produce a validated design document |
 | `/plan-grasshopper` | Turn that design into an exact, ordered build plan |
 | `/execute-grasshopper` | Build the plan in batches, checking errors as it goes |
-| `/consolidate` | Fold what was learned back into the knowledge graph |
 
 :::tip[Paste this to your agent]
 ```text
@@ -83,20 +82,6 @@ Use /capture-convention on this reference file to save my layer and block
 standards, then use /clean-layers to bring my working file into line with them.
 ```
 :::
-
-## Maintenance
-
-These are maintainer tools that operate on the Rook source tree (building the
-installer, running the test suite, security checks, knowledge consolidation). They
-ship with the plugin but only do anything useful with a full source checkout —
-most users won't need them.
-
-| Skill | What it does |
-|-------|--------------|
-| `/build-release` | Build and package the full plugin suite as a Windows installer |
-| `/test` | Run the repo's tests by layer (unit, integration, rhino, …) |
-| `/validate-security` | Exercise the security hardening against live Rhino |
-| `/consolidate` | Run knowledge consolidation over components / commands / patterns |
 
 ## How skills compose
 

@@ -9,7 +9,7 @@ Rook is two things working together:
 
 1. **An MCP server** — the ~250+ tools your assistant uses to operate Rhino and
    Grasshopper. Any MCP-capable client gets these.
-2. **A Claude Code plugin** — the *skills*, *hooks*, and *subagents* that turn those
+2. **A Claude Code plugin** — the *skills* and *hooks* that turn those
    tools into guided workflows. This is the part that makes Rook feel like it knows
    how to design, not just how to click.
 
@@ -20,9 +20,8 @@ a client with the plugin also *knows the workflows*.
 
 | Part | What it is |
 |------|------------|
-| **Skills** | 15 guided workflows you invoke with `/` — see [Skills That Ship](/rook-release/plugin/skills/) |
+| **Skills** | 11 guided workflows you invoke with `/` — see [Skills That Ship](/rook-release/plugin/skills/) |
 | **Hooks** | A session-start hook that loads Rook context and skill awareness automatically |
-| **Subagents** | `knowledge-auditor` and `native-reviewer` — specialist reviewers |
 | **MCP link** | The plugin points at the Rook MCP server, so tools and skills travel together |
 
 The plugin is declared in `.claude-plugin/plugin.json` and published through
