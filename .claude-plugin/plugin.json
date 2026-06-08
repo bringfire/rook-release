@@ -1,0 +1,13 @@
+{
+  "name": "rook",
+  "version": "1.5.9",
+  "description": "Rook — AI bridge for Rhino 3D & Grasshopper. Skills for designing, planning, and executing Grasshopper definitions, 3D road design, and LLM-powered Chirp components via MCP tools.",
+  "author": {
+    "name": "bringfire"
+  },
+  "repository": "https://github.com/bringfire/rook-release",
+  "license": "All Rights Reserved",
+  "keywords": ["rhino", "grasshopper", "3d", "cad", "mcp", "rook", "architecture"],
+  "skills": "../.claude/skills/",
+  "hooks": "../hooks/hooks.json"
+}

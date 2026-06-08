@@ -1,0 +1,19 @@
+# build output
+dist/
+# generated types
+.astro/
+# dependencies
+node_modules/
+# logs
+npm-debug.log*
+# environment
+.env
+.env.production
+# macOS
+.DS_Store
+
+# Site imagery is part of the site — override the repo-root *.png / *.svg ignore
+!src/assets/
+!src/assets/**
+!public/
+!public/**

@@ -1,0 +1,213 @@
+# .rook/conventions.yaml — Schema Reference
+#
+# Defines a project's layer organization conventions so that cleanup
+# skills (/clean-layers, /purge-file, etc.) know what "correct" looks
+# like. Extracted from a reference file via /capture-convention or
+# written by hand.
+#
+# This file documents the schema. Actual convention files live at
+# .rook/conventions.yaml in each project directory.
+
+# ─────────────────────────────────────────────────────────────────────
+# Top-level metadata
+# ─────────────────────────────────────────────────────────────────────
+
+schema_version: 1
+
+# Human-readable name for this convention set
+name: "SA Standard Template"
+
+# Where this convention came from
+source:
+  file: "SA-RHINO TEMPLATE-IMPERIAL.3dm"   # reference file used
+  captured: "2026-04-12"                     # when it was extracted
+  notes: "Firm-wide standard, imperial units"
+
+# ─────────────────────────────────────────────────────────────────────
+# Naming rules
+# ─────────────────────────────────────────────────────────────────────
+
+naming:
+  # Casing enforcement for layer names
+  # Options: UPPER, lower, Title, preserve
+  case: UPPER
+
+  # AIA/NCS discipline prefixes on material layers
+  # When true, material layers should use A-, S-, I-, etc.
+  aia_prefixes: true
+
+  # Separator between prefix and name (for AIA-coded layers)
+  # Common values: "-" (A-GLASS), "_" (A_GLASS)
+  prefix_separator: "-"
+
+# ─────────────────────────────────────────────────────────────────────
+# Top-level category structure
+# ─────────────────────────────────────────────────────────────────────
+#
+# Defines the expected top-level layer categories. Number prefixes
+# enforce sort order in Rhino's layer panel.
+#
+# Each category has:
+#   role: what kind of content belongs here
+#   required: whether this category must exist in every file
+#   children_policy: how child layers are organized
+#     - fixed: only the listed children are expected
+#     - open: any children allowed, names should follow naming rules
+#     - nested: children can have their own children (options, blocks)
+
+categories:
+  - name: "01-ARCHITECTURE"
+    role: materials
+    required: true
+    children_policy: open
+    description: "Geometry organized by material. All modeled geometry lives here."
+    infrastructure_layers:
+      # Underscore-prefixed layers for non-material organization
+      - name: "_SETOUT"
+        description: "Reference/setout geometry (grid lines, datums)"
+      - name: "_BLOCKS"
+        description: "Block definition geometry (internal layer for block objects)"
+    material_layers:
+      # Known material categories. Projects add specific variants as needed.
+      # These are the expected base materials — a project may have
+      # A-GLASS, A-ETCH GLASS 1, A-RIPPLE GLASS all under this umbrella.
+      - "A-CONCRETE"
+      - "A-GLASS"
+      - "A-METAL"
+      - "A-STONE"
+      - "A-WOOD"
+      - "A-WALL"
+      - "A-FLOOR"
+      - "A-CEILING"
+      - "S-STRUCTURE"
+
+  - name: "02-OPTIONS"
+    role: options
+    required: true
+    children_policy: nested
+    description: >
+      Design options organized by spatial zone, then numbered iterations.
+      Block instances go here. Geometry stays on material layers under
+      01-ARCHITECTURE; option layers hold block instances that reference
+      that geometry.
+    option_naming:
+      # How options are numbered/named within a zone
+      pattern: "{number}-{description}"   # e.g., "1-AS IS", "2-ADJUSTED"
+      active_marker: "***"                # appended to active option name
+
+  - name: "03-ENTOURAGE"
+    role: entourage
+    required: false
+    children_policy: fixed
+    description: "Context elements for visualization — not part of the design."
+    expected_children:
+      - "PEOPLE"
+      - "CARS"
+      - "PLANTS"
+      - "FURNITURE"
+
+  - name: "04-UTILITY"
+    role: utility
+    required: false
+    children_policy: fixed
+    description: "Working aids — clipping planes, references, detail views."
+    expected_children:
+      - "CLIPPING PLANE"
+      - "REFERENCE"
+      - "DETAIL"
+
+  - name: "05-COORDINATION"
+    role: coordination
+    required: false
+    children_policy: open
+    description: >
+      Imported coordination models (Revit, DWG). Preserved as-received
+      with source layer names intact. Not subject to material-layer or
+      naming conventions. Updated by re-import, not manual editing.
+    import_policy:
+      preserve_source_layers: true
+      preserve_blocks: true
+      naming: preserve          # don't rename to convention
+
+# ─────────────────────────────────────────────────────────────────────
+# Material-layer principle
+# ─────────────────────────────────────────────────────────────────────
+#
+# The driving principle: geometry goes on layers that denote material.
+# This section defines how material layers work.
+
+materials:
+  # Where material layers live in the hierarchy
+  parent_category: "01-ARCHITECTURE"
+
+  # Whether material layers can have sub-layers for variants
+  # e.g., A-GLASS::ETCH 1, A-GLASS::RIPPLE
+  allow_variants: true
+
+  # How variant layers are named relative to their parent
+  # Options: flat (A-ETCH GLASS 1), nested (A-GLASS::ETCH 1)
+  variant_style: flat
+
+  # Material-to-layer mapping: should each material layer have a
+  # matching render material assigned?
+  require_render_material: false
+
+# ─────────────────────────────────────────────────────────────────────
+# Block organization
+# ─────────────────────────────────────────────────────────────────────
+
+blocks:
+  # Block instances go on option layers (02-OPTIONS)
+  instance_parent: "02-OPTIONS"
+
+  # Block definition geometry can use material layers from 01-ARCHITECTURE
+  # or dedicated sub-layers under the block's option layer
+  definition_layers: material    # "material" = use 01-ARCHITECTURE layers
+                                 # "dedicated" = each block gets own sub-layers
+
+  # Naming convention for block definitions
+  naming:
+    case: UPPER
+    # Revit-imported blocks keep their source names
+    preserve_import_names: true
+
+# ─────────────────────────────────────────────────────────────────────
+# Tolerances and units
+# ─────────────────────────────────────────────────────────────────────
+
+document:
+  units: feet                     # or millimeters, meters, inches
+  tolerance: 0.001
+  angle_tolerance: 1.0            # degrees
+
+# ─────────────────────────────────────────────────────────────────────
+# Cleanup rules
+# ─────────────────────────────────────────────────────────────────────
+#
+# Policies that /clean-layers and other cleanup skills use when
+# proposing changes.
+
+cleanup:
+  # Layers that should never be deleted even if empty
+  # (convention-defined "keep even if empty" layers)
+  protected_layers:
+    - "Default"
+    - "01-ARCHITECTURE"
+    - "02-OPTIONS"
+    - "03-ENTOURAGE"
+    - "04-UTILITY"
+
+  # What to do with layers not in any category
+  orphan_policy: report           # "report" = flag but don't auto-move
+                                  # "move" = move to a catch-all layer
+                                  # "delete" = delete if empty
+
+  # What to do with stray top-level layers (e.g., Layer0, Default, Fbx_Root)
+  stray_toplevel_policy: report
+
+  # Maximum nesting depth for options
+  max_option_depth: 3             # zone → set → option
+
+  # Whether to enforce color consistency
+  # (e.g., all glass layers should be the same color)
+  enforce_layer_colors: false

@@ -1,0 +1,11 @@
+---
+// Small folio corner ornament. `pos` = tl | tr | bl | br (positioning handled in CSS).
+const { pos = 'tl' } = Astro.props;
+---
+<svg class={`corner ${pos}`} viewBox="0 0 34 34" fill="none" aria-hidden="true">
+  <path d="M1 1 H13" stroke="currentColor" stroke-width="1" />
+  <path d="M1 1 V13" stroke="currentColor" stroke-width="1" />
+  <path d="M5 5 H10" stroke="currentColor" stroke-width="1" opacity="0.6" />
+  <path d="M5 5 V10" stroke="currentColor" stroke-width="1" opacity="0.6" />
+  <circle cx="5" cy="5" r="1.4" fill="currentColor" />
+</svg>

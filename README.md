@@ -1,0 +1,54 @@
+<h1 align="center">Rook</h1>
+
+<p align="center"><strong>AI agents for Rhino&nbsp;3D and Grasshopper.</strong></p>
+
+<p align="center">
+  Operate Rhino and Grasshopper by talking to your AI assistant — close to 400
+  specialized tools for geometry, analysis, scripting, layers, blocks, documents,
+  vision, BIM, and more.
+</p>
+
+---
+
+- 📖 **Documentation** — https://bringfire.github.io/rook-release/
+- ⬇️ **Download** — the Windows installer on the [Releases](https://github.com/bringfire/rook-release/releases) page
+- 💬 **Support** — [Issues](https://github.com/bringfire/rook-release/issues) · bringfiregames@gmail.com
+
+## What is Rook?
+
+Rook gives your AI assistant direct, capable access to Rhino&nbsp;3D and
+Grasshopper. You describe what you need; Rook does it in your live model. It's not
+an autopilot that designs *for* you — it's a collaborator that helps at whatever
+stage you're in, and it's flexible enough that you decide what that help looks
+like: heavy geometry and analysis, Python/C# Grasshopper scripts, layer and block
+management, document-level operations, visualization, and more.
+
+Works with any MCP-capable assistant (Claude Code, Codex, and others) and any
+model provider (Claude, GPT, or local models) — **bring your own key**.
+
+## Install
+
+1. Download the latest installer from the [Releases](https://github.com/bringfire/rook-release/releases) page.
+2. Run it — it adds Rook to Rhino and Grasshopper and sets up the MCP server.
+3. Start Rhino, connect your AI assistant, and say hello.
+
+Full, step-by-step instructions: **https://bringfire.github.io/rook-release/start/install/**
+
+## The Claude Code plugin
+
+Rook also ships as a Claude Code plugin (guided skills + a session hook). After
+installing, you can manage it via the marketplace:
+
+```
+/plugin marketplace add bringfire/rook-release
+/plugin install rook@rook
+```
+
+## Privacy
+
+Rook is local-first and bring-your-own-key — your designs, prompts, and results
+stay on your machine. See [PRIVACY.md](PRIVACY.md).
+
+---
+
+© 2026 Bringfire Games, LLC. All rights reserved.

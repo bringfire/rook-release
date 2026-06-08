@@ -1,0 +1,8 @@
+# Astro docs build output & dependencies
+site/node_modules/
+site/dist/
+site/.astro/
+
+# OS
+.DS_Store
+Thumbs.db

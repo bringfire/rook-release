@@ -1,0 +1,78 @@
+---
+title: Install Rook
+description: Get Rook running in Rhino and connected to your AI assistant.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Getting set up is a one-time thing. Afterwards, you just talk to your assistant.
+
+:::caution[Placeholder]
+This page is a scaffold. Add the real download link, supported Rhino versions, and
+per-assistant connection details before publishing.
+:::
+
+## What you'll need
+
+- **Windows** with **Rhino 8**
+- An **AI assistant that supports MCP**, such as:
+  - **Claude Desktop**
+  - **Codex** (desktop)
+  - An MCP-capable assistant inside your code editor (e.g. an IDE extension)
+- An account or API key for the AI model you want to use (Claude, GPT, or a local
+  model)
+
+You don't need to be a programmer, and you don't need to know any Rhino commands.
+
+## Step 1 — Install the plugin
+
+<Steps>
+
+1. Download the Rook installer from the
+   [latest release](https://github.com/bringfire/rook-release/releases/latest).
+
+2. Run it. The installer adds Rook to Rhino and Grasshopper for you.
+
+3. Start (or restart) Rhino. Rook loads automatically.
+
+</Steps>
+
+## Step 2 — Connect your assistant
+
+Rook talks to your AI assistant through something called **MCP** — think of it as
+the doorway that lets your assistant reach into Rhino. You point your assistant at
+Rook once.
+
+<Steps>
+
+1. Open your assistant's settings and find where it lists **MCP servers** or
+   **connections**.
+
+2. Add **Rook** (the installer sets up what's needed; you mostly just enable it).
+
+3. Tell your assistant which AI model and key to use, if it asks.
+
+</Steps>
+
+:::tip
+Exact steps differ slightly between Claude Desktop, Codex, and IDE assistants.
+Per-assistant walkthroughs will live here — for now, follow your assistant's
+documentation for "adding an MCP server" and choose Rook.
+:::
+
+## Step 3 — Say hello
+
+Open Rhino, then in your assistant type something like:
+
+> “Are you connected to Rhino?”
+
+If Rook is wired up, your assistant will confirm the connection. Now try something
+small:
+
+> “Set up three layers — Walls, Floors, and Site — and make Site the current one.”
+
+Rhino should update. You're ready.
+
+→ Next: [Your First Conversation](/rook-release/start/first-conversation/)
