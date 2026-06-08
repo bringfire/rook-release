@@ -52,3 +52,4 @@ stay on your machine. See [PRIVACY.md](PRIVACY.md).
 ---
 
 © 2026 Bringfire Games, LLC. All rights reserved.
+The source repository remains private. This public repo contains docs, plugin metadata, and release assets. The installer includes runtime implementation files required for the local MCP server and Python-based components to run on your machine.

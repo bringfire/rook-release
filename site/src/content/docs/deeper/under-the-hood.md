@@ -71,7 +71,10 @@ Rook routes model calls through LiteLLM, so it works with Claude (Anthropic), GP
 
 The implementation — the MCP server, the native and companion plug-ins, the chat
 server, the knowledge graph, and the agent runtime — is something you never have to
-touch to use Rook.
+touch to use Rook. The source repository remains private; the public repo contains
+docs, plugin metadata, and release assets only. The installer includes runtime
+implementation files required for the local MCP server and Python-based components
+to run on your machine.
 
 Found a bug, have a question, or want to request a feature? Open an issue on the
 [Rook repository](https://github.com/bringfire/rook-release/issues) or email
