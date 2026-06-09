@@ -5,7 +5,9 @@ sidebar:
   order: 3
 ---
 
-:::caution[Coming soon]
+<span class="rook-status rook-status--soon">Shipping soon</span>
+
+:::caution[Shipping soon]
 RookSplat is not yet shipping. This page previews what's coming.
 :::
 
