@@ -1,4 +1,4 @@
-<h1 align="center">Rook</h1>
+<h1 align="center">ROOK</h1>
 
 <p align="center">
   <img src="docs/Images/Rook_02.png" alt="Rook Logo" width="345">
