@@ -14,10 +14,11 @@ Getting set up is a one-time thing. Afterwards, you just talk to your assistant.
 - **Windows** with **Rhino 8**
 - An **AI assistant that supports MCP** — **Claude Code** (CLI, desktop, or VS Code
   extension), **Codex**, or another MCP-capable client (Cursor, Windsurf)
-- **Python 3.10+** available on your system (the installer uses it to set up the
-  local server)
 - An account or API key for the AI model you want to use (Claude, GPT, or a local
   model via Ollama / LM Studio)
+
+You do **not** need to install Python. The Rook installer includes and configures
+the local runtime it needs.
 
 You don't need to be a programmer, and you don't need to know any Rhino commands.
 
@@ -34,6 +35,14 @@ You don't need to be a programmer, and you don't need to know any Rhino commands
 3. Start (or restart) Rhino. Rook loads automatically.
 
 </Steps>
+
+:::tip[Do not skip the post-install agent check]
+After Rhino restarts, open the
+[Post-Install Agent Setup](/rook-release/start/agent-post-install/) page and paste
+the prompt there into your assistant. It verifies the MCP server, live Rhino
+bridge, safe geometry round-trip, optional Grasshopper control, and skill setup,
+then helps resolve any last-mile client or plugin configuration issues.
+:::
 
 ## Step 2 — Connect your assistant
 
@@ -69,7 +78,11 @@ This provides the `/` skills + the session hook **for Claude Code**.
 
 ## Step 4 — Verify
 
-Hand your agent the [Set Up & Verify](/rook-release/start/setup-verify/) page — it
-checks the connection, the live Rhino bridge, and the skills.
+Hand your agent the
+[Post-Install Agent Setup](/rook-release/start/agent-post-install/) page. It is
+the recommended end-to-end verification prompt after a fresh installer run.
+
+For a shorter explanation of what each check means, see
+[Set Up & Verify](/rook-release/start/setup-verify/).
 
 → Next: [Your First Conversation](/rook-release/start/first-conversation/)
