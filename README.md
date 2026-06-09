@@ -1,5 +1,9 @@
 <h1 align="center">Rook</h1>
 
+<p align="center">
+  <img src="docs/Images/Rook_02.png" alt="Rook Logo" width="345">
+</p>
+
 <p align="center"><strong>AI agents for Rhino&nbsp;3D and Grasshopper.</strong></p>
 
 <p align="center">
