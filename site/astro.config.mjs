@@ -124,6 +124,7 @@ export default defineConfig({
           label: 'Going Deeper',
           items: [
             { label: 'Under the Hood', slug: 'deeper/under-the-hood' },
+            { label: 'What Rook Touches', slug: 'deeper/what-rook-touches' },
             { label: 'Troubleshooting', slug: 'deeper/troubleshooting' },
           ],
         },
