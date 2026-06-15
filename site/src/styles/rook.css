@@ -432,3 +432,54 @@ starlight-toc a { font-size: 0.95rem; }
 .rook-turn { border: 1px solid rgba(201,165,94,0.3); border-radius: 2px; padding: 1rem 1.2rem; margin: 0.7rem 0; }
 .rook-turn .who { font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rook-brass-hi); display: block; margin-bottom: 0.4rem; }
 .rook-turn p { margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.15rem, 2.2vw, 1.5rem); }
+
+/* =============================================================================
+   Install-page download CTA — brass button in the folio palette.
+   Centered, with generous breathing room above and below.
+   ============================================================================= */
+.rook-download-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 2.75rem;
+}
+.sl-markdown-content .rook-download {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem 2.6rem;
+  background: var(--rook-brass-deep);
+  border: 1px solid var(--rook-brass-deep);
+  border-radius: 3px;
+  color: var(--rook-paper);
+  text-decoration: none;
+  /* faint inner cream rule echoes the folio double-frame */
+  box-shadow: inset 0 0 0 4px rgba(240, 231, 210, 0.14), 0 3px 12px rgba(26, 20, 16, 0.22);
+  transition: background 130ms ease, border-color 130ms ease, transform 130ms ease, box-shadow 130ms ease;
+}
+.sl-markdown-content .rook-download:hover {
+  background: var(--rook-oxblood);
+  border-color: var(--rook-oxblood);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.16), 0 5px 16px rgba(26, 20, 16, 0.28);
+}
+.rook-download-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+}
+.rook-download-label::before {
+  content: "\2193"; /* ↓ */
+  margin-right: 0.6em;
+  font-weight: 700;
+}
+.rook-download-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
