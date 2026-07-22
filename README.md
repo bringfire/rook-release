@@ -15,7 +15,7 @@
 ---
 
 - 📖 **Documentation** — https://bringfire.github.io/rook-release/
-- ⬇️ **Download** — **[Rook-Setup-1.5.15.exe](https://github.com/bringfire/rook-release/releases/download/v1.5.15/Rook-Setup-1.5.15.exe)** (direct) · [latest release](https://github.com/bringfire/rook-release/releases/latest) · [all releases](https://github.com/bringfire/rook-release/releases)
+- ⬇️ **Download** — **[Rook-Setup-1.5.16.exe](https://github.com/bringfire/rook-release/releases/download/v1.5.16/Rook-Setup-1.5.16.exe)** (direct) · [latest release](https://github.com/bringfire/rook-release/releases/latest) · [all releases](https://github.com/bringfire/rook-release/releases)
 - 💬 **Support** — [Issues](https://github.com/bringfire/rook-release/issues) · bringfiregames@gmail.com
 
 ## What is Rook?
@@ -32,7 +32,7 @@ model provider (Claude, GPT, or local models) — **bring your own key**.
 
 ## Install
 
-1. Download the installer — [Rook-Setup-1.5.15.exe](https://github.com/bringfire/rook-release/releases/download/v1.5.15/Rook-Setup-1.5.15.exe) — or the [latest release](https://github.com/bringfire/rook-release/releases/latest).
+1. Download the installer — [Rook-Setup-1.5.16.exe](https://github.com/bringfire/rook-release/releases/download/v1.5.16/Rook-Setup-1.5.16.exe) — or the [latest release](https://github.com/bringfire/rook-release/releases/latest).
 2. Run it — it adds Rook to Rhino and Grasshopper and sets up the MCP server.
 3. Start Rhino, connect your AI assistant, and say hello.
 
