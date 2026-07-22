@@ -34,7 +34,7 @@ RookVision works as a round-trip:
 
 - Image — **live**
 - Video — **queued** ([Director](/rook-release/modules/director/) is shipping)
-- 3D — **arriving** (see [Hunyuan 3D](/rook-release/modules/hunyuan-3d/))
+- 3D — **roadmap** (see [Hunyuan 3D](/rook-release/modules/hunyuan-3d/))
 
 :::tip[Try it — paste to your agent]
 ```text

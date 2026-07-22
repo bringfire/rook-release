@@ -13,6 +13,9 @@ Your assistant needs Rook enabled as an MCP connection. Open its settings, check
 that Rook is listed and turned on, then restart the assistant. If you just
 installed, make sure Rhino has been started at least once so the plugin is loaded.
 
+After every Rook install, update, or repair, restart Claude, Codex, Cursor,
+Windsurf, or whichever MCP client you are using before judging the install.
+
 ## Rook isn't responding / everything hangs
 
 This usually means **Rhino is waiting on a dialog box**. Switch to the Rhino
