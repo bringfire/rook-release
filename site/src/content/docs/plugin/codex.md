@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-Codex and other MCP clients use Rook's MCP tools. The curated skill workflow ships to Claude Code via the marketplace plugin and to Codex via the installer (the same 11 user skills). Maintainer/dev-only skills ship to neither client.
+Codex and other MCP clients use Rook's MCP tools. The curated skill workflow ships to Claude Code via the marketplace plugin and to Codex via the installer (the same 9 user skills). Maintainer/dev-only skills ship to neither client.
 
 | Client | MCP tools | Skills | Session hook |
 |--------|:---------:|:------:|:------------:|

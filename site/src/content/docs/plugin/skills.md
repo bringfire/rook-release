@@ -6,20 +6,21 @@ sidebar:
 ---
 
 Skills are guided workflows you trigger with `/`. They orchestrate Rook's tools
-into multi-step processes — designing a Grasshopper definition, building a road
-network, organizing a file. Rook ships **11** of them.
+into multi-step processes — designing a Grasshopper definition, creating Chirp
+components, or organizing a file. Rook ships **9** of them.
 
 :::note
 Skills reach **Claude Code** via the marketplace plugin (`/plugin marketplace add bringfire/rook-release`
-→ `/plugin install rook@rook`). **Codex CLI** gets the same curated 11 user skills
+→ `/plugin install rook@rook`). **Codex CLI** gets the same curated 9 user skills
 installed by the installer (`~/.codex/skills`). Other MCP clients get the tools but
 not the skills. See [Plugin Overview](/rook-release/plugin/overview/).
 :::
 
-## Grasshopper — the design cascade
+## Grasshopper — routed design, planning, and execution
 
-The three skills that take a definition from idea to canvas (Rook records what it
-learns automatically). See [The Design Cascade](/rook-release/modules/design-cascade/).
+Use execution directly for a clear, bounded request. Design is available when the
+brief needs material decisions, and planning is optional for larger or higher-risk
+work. See [The Design Cascade](/rook-release/modules/design-cascade/).
 
 | Skill | What it does |
 |-------|--------------|
@@ -50,22 +51,6 @@ brief and flags the weak ones.
 ```
 :::
 
-## Roads & site
-
-RoadCreator-backed road design, from a single road to a whole network.
-
-| Skill | What it does |
-|-------|--------------|
-| `/design-road` | Design and create a single 3D road from a centerline |
-| `/masterplan-roads` | Build a whole road network from multiple centerlines (surfaces, intersections, sidewalks, crossings, guardrails, slopes) |
-
-:::tip[Paste this to your agent]
-```text
-I have several centerline curves selected. Use /masterplan-roads to turn them into
-a connected road network. Confirm the approach with me at each decision point.
-```
-:::
-
 ## Organizing & conventions
 
 The everyday cleanup work. See [Everyday Tasks](/rook-release/working/everyday-tasks/).
@@ -86,7 +71,7 @@ standards, then use /clean-layers to bring my working file into line with them.
 
 ## How skills compose
 
-The real power is chaining them. The Grasshopper cascade is the canonical example —
-`design → plan → execute` — Rook records what it learns automatically. You can mix
-freely: capture a convention, clean a file to match, then design new geometry on the
-tidy base. Just describe the end-to-end goal and let your agent sequence the skills.
+The Grasshopper skills route by need rather than enforcing a ceremony: execute a
+clear request directly, use design to resolve ambiguity, and add a durable plan when
+risk or scope warrants it. You can also mix workflows freely: capture a convention,
+clean a file to match, then design new geometry on the tidy base.
