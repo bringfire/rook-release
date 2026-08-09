@@ -52,5 +52,5 @@ tell me the gotchas it has on record.
 
 ## Related
 
-- [The Design Cascade](/rook-release/modules/design-cascade/) — its *Consolidate* phase feeds the graph
+- [The Design Cascade](/rook-release/modules/design-cascade/) — routed design, planning, and execution for Grasshopper work
 - [Multi-Agent](/rook-release/modules/multi-agent/) — how the graph keeps cheap agents competent

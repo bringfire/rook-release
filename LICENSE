@@ -1,0 +1,209 @@
+ROOK END USER LICENSE AGREEMENT
+
+Effective Date: June 1, 2026
+
+This End User License Agreement ("Agreement") is a binding legal agreement
+between you ("you" or "User") and Bringfire Games, LLC ("Bringfire Games", "we",
+"us", or "our"), the licensor of Rook. Rook includes the Rook native and
+companion plug-ins for Rhino 3D and Grasshopper, the Rook MCP server, the Rook
+skills, hooks, agents, knowledge stores, and any accompanying documentation,
+updates, and components we provide (collectively, the "Software").
+
+PLEASE READ THIS AGREEMENT CAREFULLY. BY DOWNLOADING, INSTALLING, OR USING THE
+SOFTWARE, YOU AGREE TO BE BOUND BY THIS AGREEMENT. IF YOU DO NOT AGREE, DO NOT
+DOWNLOAD, INSTALL, OR USE THE SOFTWARE.
+
+This Agreement does NOT grant you any rights to the Software's source code. The
+Software is licensed, not sold.
+
+--------------------------------------------------------------------------------
+
+1. LICENSE GRANT
+
+Subject to your compliance with this Agreement, we grant you a limited,
+non-exclusive, non-transferable, revocable license to install and use the
+Software for your personal or internal professional purposes.
+
+Paid, team, or enterprise features (if any) may be offered under separate terms.
+Where those terms conflict with this Agreement with respect to those features,
+the separate terms control.
+
+We may make the Software available through third-party distribution channels,
+including GitHub, the Claude Code plugin marketplace, and Rhino plug-in
+distribution channels (such as Food4Rhino and the Rhino Package Manager). Your
+use of any such channel is also subject to that channel's own terms. Those
+channels are not party to this Agreement and provide no support, warranty, or
+liability for the Software.
+
+2. CREDENTIALS AND BRING-YOUR-OWN-KEY
+
+The Software does not require an account with us. To use AI features, you supply
+your own credentials and API keys for the third-party model and service
+providers you choose (for example, Anthropic, OpenAI, Google, Ollama, LM Studio,
+fal.ai, Replicate, or Tencent). You are responsible for obtaining those
+credentials, complying with the applicable provider's terms, and keeping your
+credentials secure.
+
+Credentials and keys you configure are stored locally on your device and are
+used to communicate directly with the providers you select. You are responsible
+for all activity that occurs under your credentials and for any charges those
+providers bill to you.
+
+3. RESTRICTIONS
+
+You shall not, and shall not permit any third party to:
+
+(a) copy, modify, translate, or create derivative works of the Software, except
+    as expressly permitted by this Agreement or by applicable open-source
+    licenses governing bundled components (see Section 7);
+(b) distribute, sell, rent, lease, sublicense, or otherwise make the Software
+    available to any third party;
+(c) reverse engineer, decompile, or disassemble the Software, or attempt to
+    derive its source code, except to the extent such restriction is expressly
+    prohibited by applicable law;
+(d) remove, alter, or obscure any proprietary notices in the Software;
+(e) scrape, bulk-export, or harvest the Software's knowledge stores, prompts,
+    catalogs, or other data for the purpose of building a competing product, or
+    use the Software or its Outputs to train, fine-tune, or develop any machine
+    learning model or service that competes with the Software, without our prior
+    written agreement;
+(f) use the Software to process data in high-risk categories — including payment
+    card data, government identification numbers, health information, biometric
+    data, precise geolocation, data of minors, or special categories of personal
+    data under the GDPR or similar laws — without our prior written consent; or
+(g) use the Software in violation of any applicable law or third-party right.
+
+4. OWNERSHIP
+
+(a) The Software. The Software is owned by us and our licensors and is protected
+    by intellectual property laws. Except for the limited license in Section 1,
+    no rights are granted to you. All rights not expressly granted are reserved
+    by us.
+
+(b) Your Inputs. As between you and us, you retain all rights you hold in the
+    content, files, models, prompts, and instructions you provide to the Software
+    ("Inputs"). We do not operate cloud servers that receive or store your
+    Inputs; AI requests are sent from your device directly to the third-party
+    providers you configure.
+
+(c) Outputs. As between you and us, you own the geometry, definitions, images,
+    meshes, text, and other results the Software produces from your Inputs
+    ("Outputs"), subject to the rights and terms of the third-party providers
+    that generate them. You are responsible for reviewing and complying with
+    those providers' terms regarding ownership and permitted use of Outputs.
+
+(d) No training on your content. We do not use your Inputs or Outputs to train
+    our own models.
+
+5. FEEDBACK
+
+If you choose to provide suggestions, ideas, or other feedback about the Software
+("Feedback"), you grant us a non-exclusive, worldwide, perpetual, irrevocable,
+royalty-free license to use and exploit the Feedback for any purpose. This
+Section does not apply to your Inputs or Outputs, or to information you mark as
+confidential in writing before disclosure.
+
+6. UPDATES AND DATA HANDLING
+
+We may provide automatic or optional updates, which are part of the Software and
+subject to this Agreement. The Software may transmit minimal diagnostic or usage
+information to help maintain and improve it; such information excludes your
+Inputs, Outputs, prompts, and credentials, and is handled in accordance with our
+Privacy Policy (if any).
+
+AI features exchange data directly between your device and the third-party
+providers you configure; that data does not pass through our servers. Generated
+artifacts and knowledge are stored locally on your device.
+
+7. THIRD-PARTY COMPONENTS AND PLATFORMS
+
+The Software runs as a plug-in within Rhino 3D and Grasshopper, software of
+Robert McNeel & Associates, and interoperates with third-party AI providers and
+services. We are not responsible for, and make no warranties regarding, Rhino,
+Grasshopper, or any third-party provider or service, including the availability,
+accuracy, legality, or performance of their outputs.
+
+The Software includes third-party open-source components that are licensed under
+their own terms. Those components remain governed by their respective licenses,
+which are included with the Software (see the THIRD-PARTY / NOTICES materials and
+the third_party directory). Nothing in this Agreement limits your rights, or adds
+obligations, under those open-source licenses.
+
+8. DISCLAIMER OF WARRANTIES
+
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY
+KIND. TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES,
+EXPRESS, IMPLIED, OR STATUTORY, INCLUDING THE IMPLIED WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO
+NOT WARRANT THAT THE SOFTWARE WILL BE UNINTERRUPTED, ERROR-FREE, SECURE, OR
+ACCURATE.
+
+AI-generated results can be incorrect, incomplete, biased, or unexpected. You are
+responsible for reviewing and verifying all Outputs before relying on them. THE
+SOFTWARE IS NOT DESIGNED OR LICENSED FOR USE IN SAFETY-CRITICAL OR HIGH-RISK
+CONTEXTS. Without limitation, you must NOT rely on Outputs — including geometry,
+measurements, quantities, structural or load assessments, or code-compliance
+determinations — for structural engineering, life-safety, medical, aviation,
+automotive, industrial, energy, or defense purposes without independent review
+and verification by a qualified professional.
+
+9. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE AND OUR SUPPLIERS WILL NOT BE LIABLE
+FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE
+DAMAGES, OR FOR ANY LOSS OF PROFITS, REVENUE, DATA, OR GOODWILL, ARISING OUT OF
+OR RELATED TO THE SOFTWARE OR THIS AGREEMENT.
+
+OUR TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THE SOFTWARE OR THIS
+AGREEMENT WILL NOT EXCEED THE GREATER OF (a) USD 100 OR (b) THE AMOUNTS YOU PAID
+TO US FOR THE SOFTWARE DURING THE TWELVE (12) MONTHS BEFORE THE EVENT GIVING RISE
+TO THE LIABILITY.
+
+These limitations do not apply to liability that cannot be excluded or limited by
+applicable law (such as liability for death or personal injury caused by
+negligence, or for fraud or willful misconduct). A separate commercial or
+enterprise agreement may modify these limits.
+
+10. TERMINATION
+
+This Agreement and your license terminate automatically if you breach any of its
+terms. You may terminate at any time by ceasing all use of the Software. Upon
+termination, you must stop using and uninstall and delete all copies of the
+Software. Sections 3, 4, 5, 7, 8, 9, 11, 12, and 13 survive termination.
+
+11. RELATIONSHIP TO OTHER AGREEMENTS
+
+This Agreement governs your use of the Software. Any separately published Terms
+of Use and Privacy Policy govern related online services and the handling of
+data, respectively. For conflicts specific to the Software, this Agreement
+controls over the Terms of Use. A separate commercial or enterprise agreement, if
+signed, overrides this Agreement to the extent of any conflict.
+
+12. GOVERNING LAW
+
+This Agreement is governed by the laws of the State of California, USA, without
+regard to its conflict-of-laws rules. The state and federal courts located in Los
+Angeles County, California will have exclusive jurisdiction and venue over any
+dispute arising out of or relating to this Agreement.
+
+13. EXPORT AND SANCTIONS
+
+You must comply with all applicable export control and economic sanctions laws.
+You may not use, export, or re-export the Software in violation of those laws, and
+you represent that you are not located in, and will not use the Software in, any
+embargoed or restricted territory or in violation of any applicable restriction.
+
+14. CONTACT
+
+Questions about this Agreement may be sent to:
+
+  Bringfire Games, LLC
+  Email: bringfiregames@gmail.com
+  Web:   https://github.com/bringfire/Rook
+
+--------------------------------------------------------------------------------
+
+Copyright (c) 2026 Bringfire Games, LLC. All rights reserved.
+
+Rook is licensed, not sold. Third-party open-source components are licensed under
+their own terms; see the accompanying notices.

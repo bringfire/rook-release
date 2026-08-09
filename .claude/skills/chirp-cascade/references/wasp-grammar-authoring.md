@@ -165,11 +165,20 @@ chirp_create(
 # Phase A: Create Chirp components (upstream first)
 
 # A1: Input panels
-gh_execute_intent(intent="create panel", x=100, y=100)   # → $BRIEF_PANEL
-gh_execute_intent(intent="create panel", x=100, y=200)   # → $PARTS_PANEL
-gh_execute_intent(intent="create panel", x=100, y=300)   # → $SITE_PANEL
-gh_execute_intent(intent="create panel", x=100, y=600)   # → $GRAMMAR_SYNTAX_PANEL
-gh_execute_intent(intent="create panel", x=100, y=700)   # → $STRUCTURAL_REQ_PANEL
+snap = gh_snapshot()
+gh_edit(
+    epoch=snap["epoch"],
+    create=[
+        {"temp_id": "T1", "type": "panel", "content": "<design brief>", "pos": [100, 100]},
+        {"temp_id": "T2", "type": "panel", "content": "<part types>", "pos": [100, 200]},
+        {"temp_id": "T3", "type": "panel", "content": "<site constraints>", "pos": [100, 300]},
+        {"temp_id": "T4", "type": "panel", "content": "<Wasp grammar syntax>", "pos": [100, 600]},
+        {"temp_id": "T5", "type": "panel", "content": "<structural requirements>", "pos": [100, 700]},
+    ],
+)
+# Record T1-T5 from edit_summary.temp_id_map as $BRIEF_PANEL,
+# $PARTS_PANEL, $SITE_PANEL, $GRAMMAR_SYNTAX_PANEL, and
+# $STRUCTURAL_REQ_PANEL.
 
 # A2: Planner
 chirp_create(category="planner", name="Grammar Planner", ...)  # → $PLANNER
@@ -196,14 +205,24 @@ chirp_create(category="gate", name="Grammar Gate", ...)  # → $GATE
 # Wire: $INTERPRETER.ProductionRules → Gate.ProductionRules
 
 # A6: Correction feedback panel (for manual refinement loop)
-gh_execute_intent(intent="create panel", x=700, y=400)   # → $CORRECTION_PANEL
+snap = gh_snapshot()
+gh_edit(
+    epoch=snap["epoch"],
+    create=[{"temp_id": "T1", "type": "panel", "content": "", "pos": [700, 400]}],
+)
+# Record T1 as $CORRECTION_PANEL.
 # Display: $GATE.CorrectionNeeded → $CORRECTION_PANEL
 # User manually copies correction to Interpreter's Correction pin if needed
 
 # Phase B: Wire Gate output to Wasp Graph-Grammar Aggregation
 
 # B1: Grammar output panel (bridges Chirp → Wasp)
-gh_execute_intent(intent="create panel", x=900, y=300)   # → $GRAMMAR_OUTPUT
+snap = gh_snapshot()
+gh_edit(
+    epoch=snap["epoch"],
+    create=[{"temp_id": "T1", "type": "panel", "content": "", "pos": [900, 300]}],
+)
+# Record T1 as $GRAMMAR_OUTPUT.
 # Wire: $GATE.FinalGrammar → $GRAMMAR_OUTPUT
 
 # B2: Wire to Wasp (assumes wasp-grammar-aggregate sub-skill has created the component)

@@ -46,10 +46,10 @@ a Chirp component without selecting a category from the list below.
 ### Step 0: Preflight
 
 1. **Rhino**: Call `rhino_ping`. If no response → tell user to open Rhino, stop.
-2. **Chirp adapter**: Call `chirp_create` with a trivial test or check Rook MCP status. Chirp is auto-managed by Rook's chirp_manager — if the adapter isn't running, the MCP server will start it automatically via CHIRP_HOME discovery. If it fails, tell user to check their Chirp installation.
+2. **Chirp adapter**: Do not probe with a throwaway `chirp_create`; it mutates on success. The first user-authorized creation performs Chirp health admission before source generation or Grasshopper mutation. Classify any failure using the contract below.
 3. **Grasshopper**: Call `gh_status` or `gh_snapshot`. If GH not open → tell user, stop.
 
-All three confirmed before proceeding.
+Confirm Rhino and Grasshopper before proceeding. Chirp is admitted by the first authorized creation.
 
 ### Step 1: Determine Category
 
@@ -106,6 +106,15 @@ Present the design to the user. Get approval before creating.
    - Signature field names (they ARE the prompt — rename for clarity)
    - Whether the component needs additional context inputs
    - Whether the adapter is running the right DSPy module for this category
+
+### Failure handling
+
+- `chirp_invalid_inference_timeout`: Chirp is disabled by invalid timeout configuration. Report the configuration error and do not mutate Grasshopper.
+- `chirp_inference_timeout`: Chirp exhausted its total inference budget. Report an inference timeout, not a compilation failure.
+- `chirp_transport_timeout`: The generated client reached its outer transport ceiling. Verify Chirp/provider health before deciding whether to retry.
+- `component_errors`: Report the messages returned by the Grasshopper component.
+
+After partial creation, take a fresh snapshot and retry only missing work. Never replay already successful creation or wiring.
 
 ## Signature Design Rules
 

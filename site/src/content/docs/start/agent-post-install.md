@@ -35,12 +35,12 @@ mark a step PASS without showing me the tool output.
    Grasshopper assembly isn't loaded, that only means Grasshopper isn't open — ask
    me to open it and retry rather than marking this FAILED. Once it reports
    available, tell me the version and canvas state and take a canvas snapshot.
-5. Skills — confirm the Rook skills are available (e.g. /design-grasshopper, /chirp,
-   /design-road). If they're missing and you can run slash commands, install the
+5. Skills — confirm the Rook skills are available (e.g. /design-grasshopper,
+   /execute-grasshopper, /chirp). If they're missing and you can run slash commands, install the
    plugin (otherwise ask me to run these):
        /plugin marketplace add bringfire/rook-release
        /plugin install rook@rook
-   then confirm the 11 skills appear.
+   then confirm the 9 skills appear.
 6. Clean up — delete the test sphere you created (and any test layer), then confirm
    the object count matches what you reported in step 3, so my document is left
    exactly as it was.
@@ -75,10 +75,10 @@ mark a step PASS without showing me the tool output.
    me to open it and retry rather than marking this FAILED. Once it reports
    available, tell me the version and canvas state and take a canvas snapshot.
 5. Skills — confirm the curated Rook skills are installed (under ~/.codex/skills)
-   and that AGENTS.md guidance is present. You should have the 11 user skills:
+   and that AGENTS.md guidance is present. You should have the 9 user skills:
    design-grasshopper, plan-grasshopper, execute-grasshopper, chirp, chirp-cascade,
-   design-road, masterplan-roads, capture-convention, clean-layers, project-setup,
-   twisted-column. If any are missing, tell me to re-run the Rook installer with
+   capture-convention, clean-layers, project-setup, twisted-column. If any are missing,
+   tell me to re-run the Rook installer with
    Codex support.
 6. Clean up — delete the test sphere you created (and any test layer), then confirm
    the object count matches what you reported in step 3, so my document is left

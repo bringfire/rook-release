@@ -30,7 +30,14 @@ Create dramatic twisted architectural forms by lofting through incrementally rot
 Create the first rectangular profile at the origin.
 
 ```python
-rhino_execute_intent(intent=f"create rectangle at 0,0,0 width {base_width} height {base_height}")
+result = rhino_create(
+    type="RECTANGLE",
+    origin=[0, 0, 0],
+    width=base_width,
+    height=base_height,
+)
+base_profile_id = result["id"]
+rhino_geometry(id=base_profile_id)
 ```
 
 **Note:** Rectangle is created on XY plane at Z=0.
@@ -42,9 +49,16 @@ Copy the base profile to each height level. For 5 profiles over 40 units:
 
 ```python
 # Copy base profile to each height
+profile_ids = [base_profile_id]
 for i in range(1, num_profiles):
     z_offset = (column_height / (num_profiles - 1)) * i
-    rhino_copy(ids=[base_profile_id], offset=[0, 0, z_offset])
+    copy_result = rhino_copy(
+        ids=[base_profile_id],
+        offset=[0, 0, z_offset],
+    )
+    if copy_result.get("copiedCount") != 1:
+        raise Exception("profile copy did not return exactly one object")
+    profile_ids.append(copy_result["copies"][0]["newId"])
 ```
 
 ### Step 3: Rotate Each Profile
@@ -61,26 +75,24 @@ for i, profile_id in enumerate(profile_ids):
         continue  # Base profile stays at 0°
     angle = twist_per_level * i
     # Get profile center for rotation
-    centroid = rhino_measure_centroid(id=profile_id)
+    centroid_result = rhino_measure_centroid(id=profile_id)
     rhino_transform(
         ids=[profile_id],
         operation="rotate",
         angle=angle,
         axis=[0, 0, 1],
-        center=centroid["point"]
+        center=centroid_result["centroid"],
     )
 ```
 
 ### Step 4: Loft Through Profiles
 
-Select all profiles and loft to create the twisted surface.
+Loft the explicit profile IDs to create the twisted surface.
 
 ```python
-# Select all profile curves
-rhino_select(ids=all_profile_ids)
-
-# Loft through selected curves
-rhino_execute_intent(intent="loft through selected curves")
+loft = rhino_create_loft(curveIds=profile_ids, loftType="Normal")
+loft_id = loft["objects"][0]["id"]
+rhino_geometry(id=loft_id)
 ```
 
 **Gotcha:** Loft creates an OPEN surface, not a solid. See Step 5.
@@ -90,7 +102,21 @@ rhino_execute_intent(intent="loft through selected curves")
 Cap the open ends to create a closed solid.
 
 ```python
-rhino_execute_intent(intent="cap the selected surface")
+rhino_execute(code=f"""
+import System
+import Rhino
+doc = Rhino.RhinoDoc.ActiveDoc
+obj = doc.Objects.FindId(System.Guid('{loft_id}'))
+if obj is None:
+    raise Exception('loft object not found')
+capped = obj.Geometry.CapPlanarHoles(doc.ModelAbsoluteTolerance)
+if capped is None:
+    raise Exception('planar cap failed')
+if not doc.Objects.Replace(obj.Id, capped):
+    raise Exception('failed to replace loft with capped brep')
+doc.Views.Redraw()
+""")
+rhino_geometry(id=loft_id)
 ```
 
 **Note:** Cap modifies the object in place. `objects_created=0` is normal.
@@ -103,7 +129,10 @@ To create a hollow shell, use boolean difference with a scaled inner copy.
 
 ```python
 # Copy the solid column
-inner_id = rhino_copy(ids=[column_id], offset=[0, 0, 0])
+copy_result = rhino_copy(ids=[loft_id], offset=[0, 0, 0])
+if copy_result.get("copiedCount") != 1:
+    raise Exception("inner-solid copy did not return exactly one object")
+inner_id = copy_result["copies"][0]["newId"]
 
 # Scale smaller in XY but LARGER in Z (extends through top/bottom)
 # This ensures boolean intersection
@@ -113,8 +142,18 @@ center = rs.SurfaceVolumeCentroid('{inner_id}')[0]
 rs.ScaleObject('{inner_id}', center, (0.7, 0.7, 1.3))
 """)
 
-# Boolean difference to hollow
-rhino_execute_intent(intent="boolean difference between outer and inner solids")
+# Boolean difference to hollow, then verify the returned result object
+hollow = rhino_boolean(
+    operation="difference",
+    targetId=loft_id,
+    toolIds=[inner_id],
+    deleteInputs=True,
+)
+hollow_ids = hollow.get("resultIds", [])
+if not hollow_ids:
+    raise Exception("boolean difference returned no result solids")
+hollow_id = hollow_ids[0]
+rhino_geometry(id=hollow_id)
 ```
 
 See [hollowing-gotchas.md](./references/hollowing-gotchas.md) for details.
@@ -129,30 +168,46 @@ For a column with:
 
 ```python
 # Step 1: Base profile
-rhino_execute_intent(intent="create rectangle at 0,0,0 width 10 height 10")
-base_id = get_last_created_id()
+base = rhino_create(type="RECTANGLE", origin=[0,0,0], width=10, height=10)
+base_id = base["id"]
 
 # Step 2: Copy to heights
 heights = [10, 20, 30, 40]
 profile_ids = [base_id]
 for h in heights:
-    result = rhino_copy(ids=[base_id], offset=[0, 0, h])
-    profile_ids.append(result["ids"][0])
+    copy_result = rhino_copy(ids=[base_id], offset=[0, 0, h])
+    if copy_result.get("copiedCount") != 1:
+        raise Exception("profile copy did not return exactly one object")
+    profile_ids.append(copy_result["copies"][0]["newId"])
 
 # Step 3: Rotate profiles (15° increments for 60° total over 4 steps)
 for i, pid in enumerate(profile_ids[1:], 1):
     angle = 15 * i
-    centroid = rhino_measure_centroid(id=pid)
-    rhino_transform(ids=[pid], operation="rotate", angle=angle, axis=[0,0,1], center=centroid["point"])
+    centroid_result = rhino_measure_centroid(id=pid)
+    rhino_transform(
+        ids=[pid],
+        operation="rotate",
+        angle=angle,
+        axis=[0,0,1],
+        center=centroid_result["centroid"],
+    )
 
 # Step 4: Loft
-rhino_select(ids=profile_ids)
-rhino_execute_intent(intent="loft through selected curves")
-loft_id = get_last_created_id()
+loft = rhino_create_loft(curveIds=profile_ids, loftType="Normal")
+loft_id = loft["objects"][0]["id"]
 
 # Step 5: Cap
-rhino_select(ids=[loft_id])
-rhino_execute_intent(intent="cap selected surface")
+rhino_execute(code=f"""
+import System
+import Rhino
+doc = Rhino.RhinoDoc.ActiveDoc
+obj = doc.Objects.FindId(System.Guid('{loft_id}'))
+capped = obj.Geometry.CapPlanarHoles(doc.ModelAbsoluteTolerance)
+if capped is None or not doc.Objects.Replace(obj.Id, capped):
+    raise Exception('failed to cap loft')
+doc.Views.Redraw()
+""")
+rhino_geometry(id=loft_id)
 ```
 
 ## Variations

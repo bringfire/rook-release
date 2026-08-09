@@ -42,7 +42,7 @@ step PASS without showing me the tool output.
    available, tell me the version and canvas state.
 
 5. Skills (Claude Code only) — check whether the Rook skills are available (for
-   example /design-grasshopper, /chirp, /design-road). If they aren't, the Rook
+   example /design-grasshopper, /execute-grasshopper, /chirp). If they aren't, the Rook
    marketplace plugin may not be installed yet — walk me through running
    `/plugin marketplace add bringfire/rook-release` then `/plugin install rook@rook`.
 
