@@ -26,13 +26,13 @@ the `chirp_create` MCP tool.
 
 ### Step 0: Preflight
 
-Before any design work, verify all services are up:
+Before any design work, verify the host prerequisites:
 
 1. **Rhino**: Call `rhino_ping`. If no response, tell the user to open Rhino.
-2. **Chirp adapter**: Chirp is auto-managed by Rook's chirp_manager — it starts automatically when needed via CHIRP_HOME discovery. If `chirp_create` calls fail, tell the user to check their Chirp installation.
+2. **Chirp adapter**: Do not issue a throwaway `chirp_create`. Chirp is auto-managed by Rook's chirp_manager and is admitted by the first user-authorized creation.
 3. **Grasshopper**: Verify GH is open (attempt `gh_snapshot` or similar). If not, tell the user.
 
-All three must be confirmed before moving to Step 1.
+Confirm Rhino and Grasshopper before moving to Step 1. Classify Chirp admission failures using the contract below.
 
 ### Step 1: Decompose
 
@@ -69,6 +69,7 @@ For each component in dependency order (upstream first):
 1. Call `chirp_create` MCP tool with `pins_in`, `pins_out`, `signature`
 2. Note the component GUID from the creation result
 3. After all components exist, wire Reasoning outputs to downstream inputs using `gh_edit`
+   - Treat the `gh_edit` response as topology confirmation; read Reasoning outputs with a follow-up `gh_snapshot` after the solve settles
 4. Place Panel components on each Reasoning output for visibility
 5. Place a Panel for the design brief input text
 
@@ -87,6 +88,15 @@ For each component in dependency order (upstream first):
 1. Change the brief text to a contrasting scenario
 2. Verify all outputs shift coherently
 3. If a downstream component ignores upstream reasoning, rename its reasoning input pin to something more descriptive (e.g., `massing_rationale` instead of generic `reasoning`)
+
+### Failure handling
+
+- `chirp_invalid_inference_timeout`: Chirp is disabled by invalid timeout configuration. Report the configuration error and do not mutate Grasshopper.
+- `chirp_inference_timeout`: Chirp exhausted its total inference budget. Report an inference timeout, not a compilation failure.
+- `chirp_transport_timeout`: A generated client reached its outer transport ceiling. Verify Chirp/provider health before deciding whether to retry.
+- `component_errors`: Report the messages returned by the affected Grasshopper component.
+
+After partial cascade construction, take a fresh snapshot and retry only missing work. Never replay already successful components or connections.
 
 ## Key Principles
 

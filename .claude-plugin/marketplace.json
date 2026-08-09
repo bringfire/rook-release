@@ -5,19 +5,19 @@
   },
   "metadata": {
     "description": "Rook plugins for Rhino 3D & Grasshopper AI automation",
-    "version": "1.5.9"
+    "version": "1.5.18"
   },
   "plugins": [
     {
       "name": "rook",
       "source": "./",
-      "description": "Rook — AI bridge for Rhino 3D & Grasshopper. Skills, hooks, and MCP tools for designing and building parametric definitions, 3D roads, and LLM-powered components via natural language.",
-      "version": "1.5.9",
+      "description": "Rook — an MCP bridge for Rhino 3D and Grasshopper, with skills and hooks for designing and building parametric definitions and LLM-powered components.",
+      "version": "1.5.18",
       "author": {
         "name": "bringfire"
       },
       "repository": "https://github.com/bringfire/rook-release",
-      "license": "All Rights Reserved",
+      "license": "SEE LICENSE IN LICENSE",
       "keywords": ["rhino", "grasshopper", "3d", "cad", "mcp", "rook", "architecture"],
       "category": "development"
     }

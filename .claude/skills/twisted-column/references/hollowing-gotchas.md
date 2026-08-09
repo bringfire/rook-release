@@ -74,10 +74,22 @@ Formula: `wall_thickness = (original_width / 2) * (1 - scale_factor)`
 For more complex shapes, consider using `_OffsetSrf` instead:
 
 ```python
-rhino_execute_intent(intent="offset surface inward by 1.5 units")
+offset = rhino_offset_brep(
+    brepId=outer_id,
+    distance=-1.5,
+    solid=True,
+    extend=True,
+)
+offset_ids = offset.get("offsetIds", [])
+if not offset_ids:
+    raise Exception("brep offset returned no offset objects")
+result_id = offset_ids[0]
+rhino_geometry(id=result_id)
 ```
 
-This creates a true offset but may fail on tight corners.
+This uses the typed offset route and creates a true offset, but it may fail on
+tight corners. Inspect the structured result before deleting or replacing the
+original.
 
 ## Verification
 
@@ -85,8 +97,8 @@ After boolean difference, verify the result:
 
 ```python
 # Check volume decreased (hollow should have less volume)
-original_volume = rhino_measure_volume(id=outer_id)
-result_volume = rhino_measure_volume(id=result_id)
+original_volume = rhino_measure_volume(id=outer_id)["volume"]
+result_volume = rhino_measure_volume(id=result_id)["volume"]
 
 if result_volume < original_volume:
     print("Successfully hollowed!")

@@ -1,166 +1,73 @@
 ---
 name: execute-grasshopper
-description: |
-  Execute a Grasshopper implementation plan by running MCP tool calls in
-  batches with solve/error checkpoints between each batch. Use after
-  /plan-grasshopper produces a plan doc, or when the user has an exact
-  step-by-step tool call sequence to execute on the GH canvas.
-argument-hint: "<path to plan doc>"
+description: >
+  Use when the user asks to build or modify a Grasshopper definition through
+  Rook.
 ---
 
-# Execute Grasshopper Definition
+# Execute Grasshopper Work
 
-Execute an implementation plan by calling MCP tools in batches with verification checkpoints. This skill assumes all decisions have been made — it follows the plan exactly, adapting only when errors require course correction.
+## Authorization
 
-## The Process
+A direct build or edit request authorizes the bounded mutations needed to produce the requested result. Ask again only when the request is ambiguous, destructive, would change pre-existing content outside the admitted boundary, or would materially expand scope.
 
-### 1. Pre-flight Check
+Execution owns mutation. It may consume a clear brief, an approved design, or an optional technical plan.
 
-Before executing any tool calls:
+## Admit the Live Target
 
-```python
-# Confirm Grasshopper is running
-gh_status()
+Before mutation:
 
-# Capture baseline canvas state
-gh_snapshot()
-```
+1. Confirm the intended host and document identity.
+2. Capture a fresh gh_snapshot and take its fresh epoch for the immediate batch.
+3. Resolve every unfamiliar component identity with `gh_library` and every required port with `gh_batch_component_info`.
+4. When a needed admitted tool is hidden, use `rook_tools_search`, `rook_tools_read`, and `rook_tools_call`.
+5. Compare any optional structural baseline with the live document.
+6. Start an execution-owned ID ledger containing temporary IDs, committed IDs, authorized pre-existing IDs, and operation outcomes.
 
-Read the plan document from the argument path (resolve to absolute path first — `Read` requires absolute paths). Parse:
-- The gotchas section (load into working memory for error handling)
-- Each batch with its steps
-- Checkpoint expectations
-- Rollback strategy
-- Success criteria
+For Wasp work, apply `../design-grasshopper/references/wasp-admission.md`. Failed admission stops before mutation with the missing component or port evidence reported.
 
-If the plan references an existing canvas state that doesn't match reality, stop and report the mismatch.
+If no admitted host, mutation tool, or required live component can be reached, stop without mutation. Preserve useful design or plan artifacts and report the unavailable boundary.
 
-### 2. Initialize GUID Registry
+## Admit Drift
 
-Create a mapping from plan variable names to actual GUIDs:
+Refresh volatile component identities and ports when their meaning is unchanged. Omit operations already satisfied by the live graph.
 
-```
-GUID Registry:
-  $RADIUS_SLIDER → (not yet assigned)
-  $SPHERE        → (not yet assigned)
-  ...
-```
+Stop for approval when drift changes semantics, topology, ownership, or preservation obligations. A missing or stale structural baseline is advisory only; re-admit the live state before acting.
 
-As each `gh_execute_intent` returns a GUID, update the registry. All subsequent tool calls that reference `$RADIUS_SLIDER` use the actual GUID from the registry.
+## Apply Bounded Batches
 
-### 3. Execute Batches
+Use `gh_edit` for ordered batch mutation. It may return `partial_success`: earlier operations may commit before a later operation fails.
 
-For each batch in the plan:
+For every result:
 
-**Before the batch:**
-- Announce: "Starting Batch N: <description> (N steps)"
+- inspect per-operation results, verification state, errors, returned topology, and `edit_summary.temp_id_map`;
+- enter every already committed creation and applied operation in the execution-owned ledger;
+- preserve the operation order when classifying failed or unapplied work; and
+- never assume the whole batch rolled back.
 
-**For each step:**
+After partial success, capture a new snapshot and fresh epoch. Retry only failed or unapplied operations that remain authorized and semantically unchanged. Never replay work already committed. Omit any operation now already satisfied.
 
-1. **`gh_execute_intent` calls:**
-   - Execute with exact parameters from the plan
-   - Capture the returned GUID
-   - Map it in the GUID registry
-   - If creation fails: check gotchas, attempt ONE fix, re-try
-   - If still failing: mark as failed, skip wiring to this component
+Group, move, disconnect, retry, or delete only execution-owned state unless the user explicitly authorized specific pre-existing state.
 
-2. **`gh_set_value` calls:**
-   - Execute immediately after the component it targets
-   - Verify the value was set (check return)
+## Checkpoint and Recover
 
-3. **`gh_edit(connect=[...])` calls:**
-   - Substitute actual short IDs from the registry for plan variable names
-   - If either source or target is marked as failed: skip this connection
-   - If connection fails: inspect both components with `gh_batch_component_info(names=[...])`
+After each bounded batch, poll `gh_status` only to a fixed timeout. Continue only when the solver is enabled, the solution is ready for edit, and its state is understood. Then use `gh_errors` and inspect the relevant outputs and connections.
 
-**At each checkpoint:**
-```python
-gh_solve(delay=500)
-errors = gh_errors()
-```
+If a batch has a resolvable defect, make one bounded correction from current live evidence:
 
-- **No errors:** Continue to next batch
-- **Warnings only:** Note them, continue (warnings are usually acceptable)
-- **Errors on a component:**
-  1. Check if the error matches a gotcha from the plan
-  2. If yes: apply the documented fix
-  3. If no: inspect with `gh_batch_component_info(names=[<component_name>])`
-  4. Attempt ONE fix (reconnect, change parameter, insert converter)
-  5. Re-run checkpoint
-  6. If error persists: log it and continue (unless it blocks downstream)
+1. inspect the affected component and ports;
+2. capture refreshed state and epoch;
+3. apply only the missing or incorrect owned operations; and
+4. repeat the relevant verification.
 
-**After the batch:**
-- Report: "Batch N complete: X components created, Y connections made, Z errors"
+If the correction fails or an unresolved dependency blocks downstream work, stop. Report completed operations, failed or unapplied operations, current IDs, and the decision required from the user. Do not continue through a broken dependency.
 
-### 4. Error Escalation
+See [checkpoint protocol](references/checkpoint-protocol.md) for the compact result and recovery contract.
 
-Track consecutive errors. If **2 or more consecutive batches** have unresolved errors:
-- Stop execution
-- Report all accumulated errors to the user
-- Suggest: which batch to roll back, what might fix the issue
-- Wait for user guidance before continuing
+## Finalize and Return
 
-### 5. Post-Execution
+Do not run global cleanup. Apply requested grouping or layout only to execution-owned components.
 
-After all batches complete:
+Capture a final fresh snapshot, inspect errors, and verify the requested outputs and connections. Return a concise report of created and changed state, remaining warnings or failures, and cleanup of any disposable execution-owned fixtures.
 
-```python
-# Auto-organize the canvas layout
-gh_canvas_cleanup()
-
-# Create visual groups as specified in the plan
-gh_edit(epoch=<current>, groups=[
-  {"action": "create", "nick": "Inputs", "colour": "#3366FF", "members": [...]},
-  {"action": "create", "nick": "Processing", "colour": "#33AA66", "members": [...]},
-  {"action": "create", "nick": "Output", "colour": "#FF8833", "members": [...]}
-])
-
-# Final verification
-gh_solve(delay=500)
-final_errors = gh_errors()
-final_state = gh_snapshot()
-```
-
-**Report to user:**
-```
-Execution complete:
-- Components created: 12
-- Connections made: 15
-- Groups created: 3
-- Final errors: 0
-- Canvas organized: yes
-
-The definition should now show <success criteria from plan>.
-```
-
-### 6. Handoff to Consolidate
-
-After reporting results:
-
-**REQUIRED:** Invoke consolidate to record what was learned:
-```python
-Skill(skill="consolidate")
-```
-
-## Invariants
-
-- **Never skip a checkpoint** — every batch must verify with solve + errors
-- **Maintain the GUID registry** — plan variable → actual GUID, updated after every creation
-- **If creation errors, don't wire** — skip connections to failed components
-- **One fix attempt per error** — don't loop on the same error
-- **2+ consecutive batch errors = stop** — ask user for guidance
-- **Always canvas_cleanup before finishing** — even if there were errors
-- **Report every batch** — the user should see progress, not just the final result
-
-## Integration
-
-**Cascades into:**
-- **consolidate** (REQUIRED) — automatically invoked after execution completes
-
-**Called by:**
-- **plan-grasshopper** — after plan document is saved
-- Direct user invocation (`/execute-grasshopper`)
-
-## References
-
-- See [checkpoint-protocol.md](./references/checkpoint-protocol.md) for error classification and recovery
+Successful execution is terminal. Do not start any automatic knowledge-write or post-execution learning stage.
