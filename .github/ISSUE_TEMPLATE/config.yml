@@ -1,0 +1,13 @@
+# Blank issues stay enabled here for docs and website problems only; Rook itself
+# is tracked in the source repository.
+blank_issues_enabled: true
+contact_links:
+  - name: Report a Rook bug or request a feature
+    url: https://github.com/bringfire/Rook/issues/new/choose
+    about: Rook issues are tracked in the source repository, bringfire/Rook.
+  - name: Questions and how-to
+    url: https://github.com/bringfire/Rook/discussions
+    about: Ask in Discussions.
+  - name: Security vulnerability
+    url: https://github.com/bringfire/rook-release/blob/main/SECURITY.md
+    about: Please report privately as described in SECURITY.md, not in a public issue.
