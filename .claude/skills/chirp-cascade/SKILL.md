@@ -106,6 +106,7 @@ After partial cascade construction, take a fresh snapshot and retry only missing
 - **Signatures are prompts.** Field names like `beam_depth` communicate differently than `depth_mm`. Choose names that convey design intent.
 - **Start without geometry.** Validate the reasoning cascade with Panels first. Wire to geometry second.
 - **The Reasoning pin is always auto-added.** Every Chirp component gets one. The pin name "Reasoning" is reserved and cannot be used for user-defined output pins.
+- **Freeze and Frozen are auto-added inputs.** Every LLM-backed Chirp component stores its last model response in `Frozen` (persistent data, saved in the `.gh`) and replays it when `Freeze` is true or the model is unavailable, falling back to typed defaults otherwise. A cascade therefore still solves on a machine with no key; check Reasoning prefixes (`[frozen]`, `[frozen replay: …]`, `[deterministic fallback: …]`) to see which nodes ran live. Both names are reserved.
 
 ## References
 

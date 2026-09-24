@@ -1,8 +1,9 @@
 # Reporting Issues & Feedback
 
-Rook's source code is not open for outside contributions or redistribution — but
-your reports, questions, and ideas genuinely shape where Rook goes, and we'd love
-to hear them.
+Rook is open source under the [MIT License](LICENSE). Its source repository is
+[bringfire/Rook](https://github.com/bringfire/Rook); this repository carries the
+docs, plugin metadata, and release assets. Your reports, questions, and ideas
+genuinely shape where Rook goes, and we'd love to hear them.
 
 ## How to reach us
 
@@ -23,5 +24,6 @@ to hear them.
 
 ## Pull requests
 
-Because Rook's source is closed, we don't accept code pull requests. Filing issues
-and feedback is the best way to contribute to its direction — thank you.
+Code changes go to the source repository, [bringfire/Rook](https://github.com/bringfire/Rook),
+whose CONTRIBUTING guide covers building from source and the pull-request
+workflow. This repository accepts pull requests for its docs and site only.

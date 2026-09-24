@@ -38,6 +38,15 @@ Stop for approval when drift changes semantics, topology, ownership, or preserva
 
 Use `gh_edit` for ordered batch mutation. It may return `partial_success`: earlier operations may commit before a later operation fails.
 
+Route component authoring by capability:
+
+- create ordinary Grasshopper components through `gh_edit`;
+- create modern Python or C# script components through `gh_create_script` (or its language-specific alias); and
+- create Chirp components through `chirp_create`; and
+- correct existing script source or pins through `gh_update_script` and `gh_set_script_pins`.
+
+If an ordinary creation route returns a structured script-authoring handoff, follow the named dedicated tool. Do not repeat the refused ordinary request or attempt the raw component primitive.
+
 For every result:
 
 - inspect per-operation results, verification state, errors, returned topology, and `edit_summary.temp_id_map`;

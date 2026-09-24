@@ -40,6 +40,16 @@ a Chirp component without selecting a category from the list below.
 - `Correction` (string, optional) — Human override. When empty, no effect.
   When connected to a Panel with text, the LLM prioritizes it over upstream
   assumptions and explains the reconciliation in its Reasoning output.
+- `Freeze` (bool, optional) — When true, the component replays its frozen result
+  and never calls the model; with no frozen result it uses deterministic defaults
+  and warns. Default false.
+- `Frozen` (string, optional) — The frozen store: one entry per list item (the
+  last successful model response for that item), written by the component itself
+  into this pin's persistent data so it is saved in the `.gh` file and travels with
+  it. Leave it unconnected; wire a Panel only to supply a store by hand.
+
+`Freeze` and `Frozen` are reserved names. `deterministic_only` components get
+neither (they never call the model).
 
 ## Workflow
 
@@ -113,8 +123,35 @@ Present the design to the user. Get approval before creating.
 - `chirp_inference_timeout`: Chirp exhausted its total inference budget. Report an inference timeout, not a compilation failure.
 - `chirp_transport_timeout`: The generated client reached its outer transport ceiling. Verify Chirp/provider health before deciding whether to retry.
 - `component_errors`: Report the messages returned by the Grasshopper component.
+- `model_unavailable` (adapter 503, no credential for the model): creation still succeeds and the
+  component still solves — it replays its frozen result or uses deterministic defaults (see below).
+  Tell the user which model needs a key and where it goes; do not report a failed component.
 
 After partial creation, take a fresh snapshot and retry only missing work. Never replay already successful creation or wiring.
+
+## Frozen Results and No-Model Fallback
+
+A Chirp component never turns red because a model is missing. Every solve takes one of four paths,
+and the Reasoning output says which:
+
+| Path | When | Reasoning prefix |
+|---|---|---|
+| live | model answered | none; the component then stores the response as its frozen result |
+| frozen | `Freeze` is true and a frozen result exists | `[frozen]` |
+| frozen replay | model unreachable or unavailable, frozen result exists | `[frozen replay: reason]` plus a runtime warning; adds "inputs changed since capture" when they did |
+| deterministic fallback | model unavailable and nothing frozen, or `Freeze` is true with nothing frozen for that item | `[deterministic fallback: reason]` plus a runtime warning; outputs are typed zero values (0, 0.0, false, "") |
+
+Each path is decided per list item: a component fed three briefs keeps three frozen entries and
+can replay some items while others run live. Inference and transport timeouts are not fallbacks;
+they remain hard errors (`chirp_inference_timeout`, `chirp_transport_timeout`) for the failure handling above.
+
+Author `deterministic_code` runs after outputs on every path, so it can supply real defaults.
+When creating a component that must solve on machines without a model, give it
+`deterministic_code` that assigns sensible values when Reasoning starts with `[deterministic`.
+
+Frozen results make definitions portable: a `.gh` solved once with a model reproduces the same
+outputs on a machine with no key. Set `Freeze` to true to pin a result and stop paying for
+re-solves; set it back to false to let the model run again.
 
 ## Signature Design Rules
 
@@ -124,7 +161,7 @@ After partial creation, take a fresh snapshot and retry only missing work. Never
 - Interpreters: signature starts with reasoning → domain params
 - Critics: signature starts with multiple reasoning inputs → conflicts, score, coherent
 - Keep signatures focused: 2-4 inputs, 3-6 outputs
-- The Correction and Reasoning pins are NOT in the signature — they're handled by the adapter
+- The Correction, Freeze, Frozen and Reasoning pins are NOT in the signature — they're handled by the adapter and the generated component
 
 ## Per-Node Corrections
 
