@@ -1,12 +1,11 @@
 name: Deploy docs to GitHub Pages
 
-# Manual-only while the repo is private (free private repos can't publish Pages).
-# At public launch: uncomment the `push` trigger below and enable
+# Deploys on every push to main (and on manual dispatch). Requires
 # Settings → Pages → Build and deployment → Source: GitHub Actions.
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
 
 permissions:
   contents: read
