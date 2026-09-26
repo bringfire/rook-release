@@ -39,6 +39,49 @@ Chain several Chirp components and they can share reasoning context — a *casca
 so a multi-step design stays coherent from one decision to the next. Ask Rook to
 set one up by describing the chain you want.
 
+## Connect a model
+
+Chirp calls a language model with **your own key**. Without a key, Chirp components
+still run: they return typed default values and show a warning, and any results you
+froze with the **Freeze** pin keep replaying.
+
+1. Open `%LOCALAPPDATA%\Rook\app\chirp\` in File Explorer.
+
+2. Copy `.env.example` to a new file named `.env`, then replace `your-key-here` with
+   your key:
+
+   ```text
+   ANTHROPIC_API_KEY=sk-ant-...
+   ```
+
+3. Apply it. Chirp's background process reads `.env` only when it starts, and it keeps
+   running after you close Rhino. Sign out of Windows and back in (or, in Task Manager →
+   **Details**, end the `python.exe` processes whose command line contains
+   `-m chirp --rook-managed`). The next Chirp component starts it again with your key.
+
+The default model is `anthropic/claude-sonnet-5`. To use another provider, set
+`CHIRP_MODEL` in the same file, with that provider's key:
+
+| `CHIRP_MODEL` starts with | Key |
+|---------------------------|-----|
+| `anthropic/` | `ANTHROPIC_API_KEY` |
+| `openai/` | `OPENAI_API_KEY` |
+| `openrouter/` | `OPENROUTER_API_KEY` |
+| `gemini/` | `GEMINI_API_KEY` |
+
+For another OpenAI-compatible endpoint, describe it in `CHIRP_PROVIDERS`:
+
+```text
+CHIRP_MODEL=openai/my-model
+CHIRP_PROVIDERS={"openai/my-model": {"api_base": "https://your-endpoint/v1", "api_key_env": "MY_ENDPOINT_KEY"}}
+MY_ENDPOINT_KEY=...
+```
+
+:::caution[Keep a copy of your `.env`]
+Installing a newer Rook over an existing one keeps your `.env`. **Uninstalling Rook
+deletes it**, together with the rest of the Rook app folder.
+:::
+
 ## How you make one
 
 You don't configure Chirp by hand. Describe what the component should do:
