@@ -59,8 +59,9 @@ froze with the **Freeze** pin keep replaying.
    **Details**, end the `python.exe` processes whose command line contains
    `-m chirp --rook-managed`). The next Chirp component starts it again with your key.
 
-The default model is `anthropic/claude-sonnet-5`. To use another provider, set
-`CHIRP_MODEL` in the same file, with that provider's key:
+By default, planner components use `anthropic/claude-opus-5` and the other categories
+use `anthropic/claude-sonnet-5`. To use another model or provider, set `CHIRP_MODEL` in
+the same file (it replaces both defaults), with that provider's key:
 
 | `CHIRP_MODEL` starts with | Key |
 |---------------------------|-----|
