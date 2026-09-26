@@ -57,7 +57,20 @@ froze with the **Freeze** pin keep replaying.
 3. Apply it. Chirp's background process reads `.env` only when it starts, and it keeps
    running after you close Rhino. Sign out of Windows and back in (or, in Task Manager →
    **Details**, end the `python.exe` processes whose command line contains
-   `-m chirp --rook-managed`). The next Chirp component starts it again with your key.
+   `-m chirp --rook-managed`). The next Chirp component you **create** starts it again with
+   your key.
+
+Set your key before you build Chirp components if you can.
+
+:::caution[Components you already have]
+Each Chirp component remembers the exact address of the background process it was created
+with, and every restart of that process (including a reboot) gets a new one. After a
+restart, existing components don't reconnect when they recompute. They replay their frozen
+result or return typed defaults, with the warning `adapter not running on localhost:…`.
+To reconnect one, ask your agent to update the old port in that component's script to the
+new one. That keeps its wires and its frozen results. Or ask it to recreate the component,
+then rewire it; a recreated component starts with no frozen results.
+:::
 
 By default, planner components use `anthropic/claude-opus-5` and the other categories
 use `anthropic/claude-sonnet-5`. To use another model or provider, set `CHIRP_MODEL` in
