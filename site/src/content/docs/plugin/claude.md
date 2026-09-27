@@ -20,7 +20,8 @@ Rook works in all three tabs of the **[Claude desktop app](https://claude.ai/dow
    settings, and all three tabs share that one connection. Install Claude before
    Rook: the installer connects to Claude only if Claude is already installed. If
    you install Claude later, Rook may work in the Code tab but not in Chat or
-   Cowork; run the Rook installer again, then fully quit and reopen Claude.
+   Cowork. To fix it, open Claude once, fully quit it, run the Rook installer
+   again with the Claude component selected, then reopen Claude.
 2. **You add the skills from Claude itself:** **Customize → Plugins → Add → Add
    marketplace**, type `bringfire/rook-release`, select **Sync**, then add **Rook**.
    The plugin is saved to your Claude account, so the skills appear in Chat, Cowork,

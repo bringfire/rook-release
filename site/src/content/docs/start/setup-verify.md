@@ -62,7 +62,7 @@ Rook troubleshooting. My Rook connection check failed (the result is below). Hel
 If you can read files on this computer, read these (skip any that don't exist) and tell me what they show:
 - %LOCALAPPDATA%\Rook\logs\post_install_summary.json: did the installer's final outcome succeed?
 - The end of %LOCALAPPDATA%\Rook\logs\post_install.log
-- For Claude: the end of %LOCALAPPDATA%\Claude\logs\mcp-server-rook.log and mcp.log (older Claude versions use %APPDATA%\Claude\logs), and whether %APPDATA%\Claude\claude_desktop_config.json has a "rook" entry under "mcpServers". If %USERPROFILE%\.claude.json has a "rook" entry but claude_desktop_config.json doesn't, Claude was installed after Rook: tell me to run the Rook installer again, then fully quit and reopen Claude
+- For Claude: the end of %LOCALAPPDATA%\Claude\logs\mcp-server-rook.log and mcp.log (older Claude versions use %APPDATA%\Claude\logs), and whether %APPDATA%\Claude\claude_desktop_config.json has a "rook" entry under "mcpServers". If %USERPROFILE%\.claude.json has a "rook" entry but claude_desktop_config.json doesn't, Rook's desktop registration is missing; Claude may have been installed or first opened after Rook. Then tell me to open Claude once, fully quit it (from its icon near the clock), run the Rook installer again with the Claude component selected, then reopen Claude
 - For ChatGPT/Codex: whether %USERPROFILE%\.codex\config.toml has a [mcp_servers.rook] section
 - Whether %LOCALAPPDATA%\Rook\discovery contains files, which appear while Rhino is running with Rook loaded
 If you can't read files on this computer, tell me which of these files to open in File Explorer and exactly what to look for.
@@ -79,8 +79,8 @@ the prompt asks it to tell you what to open in File Explorer instead.
 
 | What you see | Likely cause | What to do |
 |---|---|---|
-| The assistant has no Rook tools at all | The app wasn't fully restarted, or Claude was installed after Rook | Fully quit the app (from the icon near the clock) and reopen it. If Claude still has no Rook, run the Rook installer again, then quit and reopen Claude |
-| Rook works in Claude's Code tab but not in Chat or Cowork | Claude was installed after Rook | Run the Rook installer again, then fully quit and reopen Claude |
+| The assistant has no Rook tools at all | The app wasn't fully restarted, or Rook's registration with Claude's desktop app is missing | Fully quit the app (from the icon near the clock) and reopen it. If Claude still has no Rook, see the next row |
+| Rook works in Claude's Code tab but not in Chat or Cowork | Rook's registration with Claude's desktop app is missing; Claude may have been installed or first opened after Rook | Open Claude once, fully quit it, run the Rook installer again with the Claude component selected, then reopen Claude |
 | `rhino_ping` fails | Rhino isn't running, or Rook didn't load in it | Start Rhino 8 from the Start menu. In Rhino, type `ShowRookChat`: if the panel opens, Rook is loaded |
 | Every Rook call hangs | Rhino is showing a dialog box | Switch to Rhino and close the dialog (a file picker, "Save changes?", or a command prompt) |
 | `gh_status` says not available | Grasshopper isn't open | Open Grasshopper and try again. This isn't an install problem |
