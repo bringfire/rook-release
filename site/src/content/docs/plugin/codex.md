@@ -27,6 +27,10 @@ in a new conversation. You don't need to open a project folder.
 ChatGPT asks how its actions should be approved:
 
 - **Ask for approval** (the default) asks before each Rook tool is used. Start here.
+  Codex sees a short list of Rook's tools and reaches the rest through
+  `rook_tools_call`, a gateway that can run any of them, including ones that change
+  or delete. In the connection check, `rhino_document` and `gh_status` go through
+  it. Approve `rook_tools_call` per call rather than permanently.
 - **Approve for me** only asks about actions it detects as potentially unsafe.
 - **Full access** never asks. Use it only if you understand what that allows.
 

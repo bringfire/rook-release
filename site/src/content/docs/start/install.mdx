@@ -131,10 +131,12 @@ Every step should say **PASS**, and step 4 should list nine skills such as
 `execute-grasshopper` and `chirp`. The first call can take a few seconds while the
 assistant finds Rook's tools.
 
-When your app asks permission to use a Rook tool, choose **Always allow** for these
-three. They only read, so it's safe to stop being asked about them. See
-[Choosing approvals](/rook-release/start/setup-verify/#choosing-approvals) for
-everything else.
+Your app may ask permission before each Rook tool, depending on the app and its
+approval setting. When the request names `rhino_ping`, `rhino_document`, or
+`gh_status`, you can choose **Always allow**: those three only read. If it asks
+about `rook_tools_call` instead, choose **Allow once**. That one tool can run any
+Rook tool, including ones that change or delete. See
+[Choosing approvals](/rook-release/start/setup-verify/#choosing-approvals).
 {/* screenshot: the approval prompt with Allow once / Always allow / Deny */}
 
 If a step fails, see [Set Up & Verify](/rook-release/start/setup-verify/) for a

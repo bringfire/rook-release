@@ -10,9 +10,10 @@ This test goes one step further: it creates a small test sphere, confirms it
 exists, then deletes it, which proves Rook can change your model as well as read
 it. It works the same in Claude and in the ChatGPT desktop app.
 
-Run it in an empty or saved model. Your app will ask before the create and delete
-steps; choose **Allow once** for those (see
-[Choosing approvals](/rook-release/start/setup-verify/#choosing-approvals)).
+Run it in an empty or saved model. Whether your app asks before the create and
+delete steps depends on the app and its approval setting. If it asks, choose
+**Allow once**. Claude Cowork and ChatGPT's **Full access** mode don't ask at all.
+See [Choosing approvals](/rook-release/start/setup-verify/#choosing-approvals).
 
 :::tip[Paste this to your assistant]
 ```text

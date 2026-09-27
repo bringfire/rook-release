@@ -93,16 +93,20 @@ and include what the troubleshooting prompt reported.
 
 ## Choosing approvals
 
-Your app asks before it lets the assistant use a Rook tool. How much it asks
-depends on the app.
+Whether your app asks before the assistant uses a Rook tool depends on the app and
+its approval setting.
 
 **Claude Chat** asks the first time each tool is used, with **Allow once**,
 **Always allow**, and **Deny**. **Always allow** applies to that one tool.
 
-- Choose **Always allow** for tools that only read, such as `rhino_ping`,
+- Choose **Always allow** only for tools that only read, such as `rhino_ping`,
   `rhino_document`, `rhino_objects`, `gh_status`, `gh_snapshot`, and `gh_errors`.
 - Choose **Allow once** for anything that creates, changes, deletes, or exports,
   or runs a script, until you're comfortable with how your assistant works.
+- Treat **`rook_tools_call`** as one of those. It's Rook's gateway to its full
+  tool list: one call can run any Rook tool, including ones that change or delete.
+  **Always allow** on it would allow all of them, so choose **Allow once**.
+  Assistants that see a shorter tool list use it more often, which is normal.
 
 **Claude Cowork** doesn't ask before using Rook's tools. Claude can change,
 delete, or export in Rhino without checking with you, so work on a saved copy of
@@ -115,7 +119,8 @@ Code tab.
 **ChatGPT** asks, under **How should ChatGPT actions be approved?**:
 
 - **Ask for approval** (the default) asks before each tool, like Claude Chat. Start
-  here.
+  here, with the same rule: only tools that just read, and never `rook_tools_call`,
+  should get a permanent approval.
 - **Approve for me** only asks about actions it detects as potentially unsafe.
 - **Full access** never asks. Use it only if you understand what that allows.
 
