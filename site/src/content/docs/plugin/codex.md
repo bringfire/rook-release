@@ -18,7 +18,8 @@ The Rook installer sets everything up, with nothing to type:
 - It installs the same nine Rook skills that Claude gets from the plugin.
 - It adds Rook's operating guidance (an `AGENTS.md` file).
 
-After installing or updating Rook, quit the ChatGPT app completely and reopen it.
+You can install the ChatGPT app before or after Rook. After installing or updating
+Rook, quit the ChatGPT app completely and reopen it.
 Then check it with the prompts on [Set Up & Verify](/rook-release/start/setup-verify/),
 in a new conversation. You don't need to open a project folder.
 
