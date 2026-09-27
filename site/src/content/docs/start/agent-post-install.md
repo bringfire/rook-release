@@ -23,7 +23,7 @@ You're helping me finish setting up Rook (the Rhino + Grasshopper plugin). Run t
 3. Before touching anything: call rhino_document and tell me the units and object count. Warn me if the model already has work in it, and wait for my go-ahead if it does.
 4. Round trip: create a red sphere at the origin with radius 5 (document units), then list the objects to confirm it exists. Note the new object's ID.
 5. Grasshopper: call gh_status. If Grasshopper isn't open, ask me to open it and try again instead of marking this FAILED. Once it's available, report its version and take a canvas snapshot with gh_snapshot.
-6. Skills: list the Rook skills you have. I expect nine: capture-convention, chirp, chirp-cascade, clean-layers, design-grasshopper, execute-grasshopper, plan-grasshopper, project-setup, twisted-column. If they're missing, don't try to install anything; tell me which step on the Rook install page adds them for my app.
+6. Skills: list the Rook skills you have. They come from your session rather than a tool call, so mark this step PASS when all nine are listed. I expect nine: capture-convention, chirp, chirp-cascade, clean-layers, design-grasshopper, execute-grasshopper, plan-grasshopper, project-setup, twisted-column. If they're missing, don't try to install anything; tell me which step on the Rook install page adds them for my app.
 7. Clean up: delete only the sphere you created, by its ID, and confirm the object count is back to the number from step 3.
 8. Report: a short PASS/FAIL for each step, and for any FAIL, the most likely cause and the fix in plain words, without asking me to use a terminal.
 ```
