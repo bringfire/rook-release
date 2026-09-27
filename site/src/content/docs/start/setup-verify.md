@@ -1,138 +1,151 @@
 ---
 title: Set Up & Verify
-description: Hand this page to your AI agent — it will check that Rook is installed, connected, and working.
+description: Three prompts to paste into Claude or ChatGPT — check the connection, check the skills, and fix anything that's wrong — plus how to choose approvals.
 sidebar:
   order: 3
 ---
 
-This page is written to be **handed to your AI agent**. After you've run the
-installer and restarted Rhino, paste the block below into Claude Code (or your
-MCP-capable assistant) and let it confirm everything is wired up — the start of
-working with Rook agent-first.
+After [installing Rook](/rook-release/start/install/), you check it by pasting a
+prompt into your assistant. Each prompt below was tested in Claude (Chat, Cowork, and
+the Code tab) and in the ChatGPT desktop app. Start a **new conversation** for each
+one.
 
-For a full post-install check your agent can run end-to-end, see [Post-Install Agent Setup](/rook-release/start/agent-post-install/).
+## 1. Check the connection
 
-:::tip[Paste this to your agent]
+This only reads from Rhino; it changes nothing.
+
+:::tip[Paste this to your assistant]
 ```text
-You're helping me verify a fresh Rook installation (the Rhino + Grasshopper
-plugin). Please run these checks in order and report what you find. Don't mark a
-step PASS without showing me the tool output.
-
-1. Connection — confirm the Rook tools are available (rhino_ping, gh_status). If
-   your client can't list MCP servers, just try calling rhino_ping. If no rook
-   tools exist at all, the MCP config isn't registered. A small tool count is not
-   a failure on its own — some profiles advertise a compact set.
-
-2. Live Rhino — make sure Rhino 8 is running, then call rhino_ping. You should get
-   "pong". If it fails: Rhino isn't running; the RookNative plugin didn't load (I
-   can run ShowRookChat in Rhino to check); or the port discovery file is stale —
-   restarting Rhino rewrites it. If the call HANGS rather than failing, Rhino is
-   showing a modal dialog — tell me to switch to the Rhino window and dismiss it.
-   Don't try to dismiss it with keyboard automation.
-
-3. Geometry round-trip — first call rhino_document and tell me the units and object
-   count, so I know whether you're about to touch live work. Then create a red
-   sphere at the origin with radius 5 (in document units) and confirm it exists by
-   listing the objects. This proves the whole chain works:
-   you → MCP server → HTTP bridge → RookNative → Rhino.
-
-4. Grasshopper — call gh_status. If it comes back available: false saying the
-   Grasshopper assembly isn't loaded, that only means Grasshopper isn't open — ask
-   me to open it and retry rather than marking this FAILED. Once it reports
-   available, tell me the version and canvas state.
-
-5. Skills (Claude Code only) — check whether the Rook skills are available (for
-   example /design-grasshopper, /execute-grasshopper, /chirp). If they aren't, the Rook
-   marketplace plugin may not be installed yet — walk me through running
-   `/plugin marketplace add bringfire/rook-release` then `/plugin install rook@rook`.
-
-6. Clean up — delete the test sphere and confirm the object count is back to what
-   it was in step 3, so my document is left exactly as it was.
-
-Give me a short PASS/FAIL summary for each step, and for anything that failed,
-the most likely cause and the fix.
+Rook connection check. Use only the Rook tools (Rhino/Grasshopper MCP), never any screen-control, computer-use or Windows-control tool, and change nothing.
+1. Call rhino_ping and report the result.
+2. Call rhino_document and report the document name and object count.
+3. Call gh_status and report whether Grasshopper is available.
+4. List any Rook skills you have (from plugins or skills), by name, or say "none".
+Report each step as PASS or FAIL, with the exact error text for any failure.
 ```
 :::
 
-That's it — your agent will tell you whether Rook is healthy and walk you through
-any gaps. The rest of this page explains what those checks mean.
+**What a pass looks like:** `rhino_ping` returns `pong`, the document name and
+object count match what you see in Rhino, Grasshopper shows as available, and step 4
+lists nine skills: `capture-convention`, `chirp`, `chirp-cascade`, `clean-layers`,
+`design-grasshopper`, `execute-grasshopper`, `plan-grasshopper`, `project-setup`,
+and `twisted-column`. In Claude they're shown with a `rook:` prefix.
 
-## What each check confirms
+- If step 3 says Grasshopper isn't available, Grasshopper simply isn't open. Open
+  it in Rhino and try again.
+- If step 4 says "none" in Claude, add the plugin: see
+  [Install Rook, Step 3](/rook-release/start/install/#step-3--add-rooks-skills).
 
-### 1. The MCP connection
-Rook reaches your assistant through an **MCP server** named `rook`. When you run
-`/mcp` (or your agent lists its servers), `rook` should appear. If it's missing, the
-MCP configuration wasn't registered — re-run the installer, or see
-[Claude Code & Desktop](/rook-release/plugin/claude/) for manual setup.
+## 2. Check the skills
 
-Don't treat the tool count as the test. Rook ships hundreds of tools, but the active
-profile may advertise a compact set and reach the rest through
-`rook_tools_search` / `rook_tools_call`. The reliable check is whether `rhino_ping`
-can be called at all.
+This confirms a Rook skill actually opens, not just that it's listed.
 
-### 2. The live Rhino bridge
-`rhino_ping` returns `pong` when the assistant can reach the **RookNative plugin**
-running inside Rhino. This only works when:
-
-- Rhino 8 is running
-- The RookNative plugin is loaded (run `ShowRookChat` in Rhino to confirm)
-
-The plugin binds to an OS-assigned port and writes a discovery file to
-`%LOCALAPPDATA%\Rook\discovery\` (older builds used `%TEMP%\rook\`, which is still
-read for compatibility); the MCP server reads it to find Rhino. If Rhino was moved,
-reinstalled, or hard-killed, that file can go stale — restarting Rhino rewrites it.
-
-A ping that **hangs** rather than erroring means something different: Rhino is
-showing a modal dialog and its UI thread is blocked. Only you can dismiss it, by
-switching to the Rhino window.
-
-### 3. The geometry round-trip
-Creating a sphere and reading it back exercises the full stack:
-
+:::tip[Paste this to your assistant]
+```text
+Rook skill check. You may read skill files, but don't call any Rook or Rhino tools and change nothing.
+Which Rook skill would you use to build a new Grasshopper definition from a clear, specific brief? Open its SKILL.md and tell me: its name, the plugin it comes from, and the first three steps it tells you to follow, quoted exactly.
 ```
-your agent → MCP server (Python) → HTTP bridge → RookNative (C++) → Rhino
+:::
+
+It should pick `execute-grasshopper` and quote steps that start by taking a fresh
+snapshot of the Grasshopper canvas. In Claude Chat, reading skills needs Claude's
+code execution to be turned on in its settings.
+
+## 3. If something fails
+
+Paste this, together with the failing answer. It reads Rook's own logs and tells
+you, in plain words, what is wrong and what to do.
+
+:::tip[Paste this to your assistant]
+```text
+Rook troubleshooting. My Rook connection check failed (the result is below). Help me find out why. Change nothing, and don't use any screen-control, computer-use or Windows-control tool.
+If you can read files on this computer, read these (skip any that don't exist) and tell me what they show:
+- %LOCALAPPDATA%\Rook\logs\post_install_summary.json: did the installer's final outcome succeed?
+- The end of %LOCALAPPDATA%\Rook\logs\post_install.log
+- For Claude: the end of %LOCALAPPDATA%\Claude\logs\mcp-server-rook.log and mcp.log (older Claude versions use %APPDATA%\Claude\logs), and whether %APPDATA%\Claude\claude_desktop_config.json has a "rook" entry under "mcpServers"
+- For ChatGPT/Codex: whether %USERPROFILE%\.codex\config.toml has a [mcp_servers.rook] section
+- Whether %LOCALAPPDATA%\Rook\discovery contains files, which appear while Rhino is running with Rook loaded
+If you can't read files on this computer, tell me which of these files to open in File Explorer and exactly what to look for.
+Then give me the most likely cause and the fix, in plain words, without asking me to use a terminal.
+My failing result:
 ```
+:::
 
-If the sphere appears, every layer is working.
+Claude Cowork, the Code tab, and ChatGPT can read files on your computer. Claude
+Chat usually can't (unless you've added a file-access connector). When it can't,
+the prompt asks it to tell you what to open in File Explorer instead.
 
-Asking for `rhino_document` first is deliberate: it reports the document's units (so
-`radius 5` means what you expect) and its object count, which is what step 6 checks
-the cleanup against. It also warns the agent if you're running this against a
-document with real work in it.
+### Common causes
 
-### 4. Grasshopper
-`gh_status` reports whether the Grasshopper side is live, along with the assembly
-version and canvas state. If Grasshopper simply isn't open, it returns
-`available: false` with `Grasshopper assembly is not loaded` — that's expected, not
-an install problem. Open Grasshopper and run it again.
+| What you see | Likely cause | What to do |
+|---|---|---|
+| The assistant has no Rook tools at all | The app wasn't fully restarted, or it was installed after Rook | Fully quit the app (from the icon near the clock) and reopen it. If that doesn't help, run the Rook installer again with the app already installed |
+| `rhino_ping` fails | Rhino isn't running, or Rook didn't load in it | Start Rhino 8 from the Start menu. In Rhino, type `ShowRookChat`: if the panel opens, Rook is loaded |
+| Every Rook call hangs | Rhino is showing a dialog box | Switch to Rhino and close the dialog (a file picker, "Save changes?", or a command prompt) |
+| `gh_status` says not available | Grasshopper isn't open | Open Grasshopper and try again. This isn't an install problem |
+| Tools work but step 4 lists no skills | Claude: the plugin isn't added. ChatGPT: the Codex component wasn't installed | Claude: [add the plugin](/rook-release/start/install/#step-3--add-rooks-skills). ChatGPT: run the Rook installer again with the Codex component ticked |
+| Claude says **Failed to add marketplace** | A temporary failure | Select **Sync** again |
+| Changes land in the wrong model | More than one Rhino window is open | Close the extra windows, or tell your assistant which one to use |
 
-Grasshopper is bridged by a separate managed companion, so a genuine failure here
-(Grasshopper open, still unavailable) is independent of the Rhino bridge passing.
+Still stuck? Open an issue at
+[github.com/bringfire/rook-release/issues](https://github.com/bringfire/rook-release/issues)
+and include what the troubleshooting prompt reported.
 
-### 5. The skills (Claude Code only)
-Skills like `/design-grasshopper` and `/chirp` come from the **Rook marketplace
-plugin** ([Plugin Overview](/rook-release/plugin/overview/)), not the MCP server. If
-your agent has the tools but not the skills, the plugin isn't installed yet — run
-`/plugin marketplace add bringfire/rook-release` then `/plugin install rook@rook` in
-Claude Code.
+## Choosing approvals
 
-**Codex users:** the curated skills are delivered by the installer to `~/.codex/skills`
-— no marketplace step needed.
+Whether your app asks before the assistant uses a Rook tool depends on the app and
+its approval setting.
 
-## Troubleshooting
+**Claude Chat** asks the first time each tool is used, with **Allow once**,
+**Always allow**, and **Deny**. **Always allow** applies to that one tool.
 
-| Symptom | Likely cause | Fix |
-|---------|--------------|-----|
-| `rook` not in the MCP list | MCP config missing or wrong path | Re-run the installer, or add it manually ([Claude Code](/rook-release/plugin/claude/)) |
-| `rhino_ping` errors | Rhino not running, or plugin not loaded | Start Rhino 8; run `ShowRookChat` to confirm the plugin |
-| "Connection refused" | Plugin port not discovered | Check `%LOCALAPPDATA%\Rook\discovery\` (or legacy `%TEMP%\rook\`) for discovery JSON files; restarting Rhino rewrites them |
-| Tools hang instead of erroring | Rhino is showing a modal dialog | Switch to the Rhino window and dismiss the dialog, then retry |
-| `gh_status` returns `available: false` | Grasshopper isn't open (assembly not loaded) | Open Grasshopper in Rhino, then retry — this is not an install failure |
-| Geometry lands in the wrong document | More than one Rhino window is open | Call `rhino_sessions` and bind the intended one with `rhino_set_active_instance` |
-| Tools work but no skills | Marketplace plugin not installed (Claude Code) | Run `/plugin marketplace add bringfire/rook-release` then `/plugin install rook@rook` — see [Plugin Overview](/rook-release/plugin/overview/) |
+- Choose **Always allow** only for tools that only read, such as `rhino_ping`,
+  `rhino_document`, `rhino_objects`, `gh_status`, `gh_snapshot`, and `gh_errors`.
+- Choose **Allow once** for anything that creates, changes, deletes, or exports,
+  or runs a script, until you're comfortable with how your assistant works.
+- Treat **`rook_tools_call`** as one of those. It's Rook's gateway to its full
+  tool list: one call can run any Rook tool, including ones that change or delete.
+  **Always allow** on it would allow all of them, so choose **Allow once**.
+  Assistants that see a shorter tool list use it more often, which is normal.
+
+**Claude Cowork** doesn't ask before using Rook's tools. Claude can change,
+delete, or export in Rhino without checking with you, so work on a saved copy of
+your model. **Undo** in Rhino reverses model changes, but not files that were
+exported.
+
+**The Code tab** follows its own permission mode, which you choose in the
+Code tab.
+
+**ChatGPT** asks, under **How should ChatGPT actions be approved?**:
+
+- **Ask for approval** (the default) asks before each tool, like Claude Chat. Start
+  here, with the same rule: only tools that just read, and never `rook_tools_call`,
+  should get a permanent approval.
+- **Approve for me** only asks about actions it detects as potentially unsafe.
+- **Full access** never asks. Use it only if you understand what that allows.
+
+:::caution[Rook never needs screen control]
+Rook works entirely through its own tools. Don't turn on computer-use, screen-control,
+or "Windows control" extensions to make Rook work. They let an assistant act on
+anything on your computer, including your email, and Rook gains nothing from them.
+:::
+
+## What the checks confirm
+
+- **`rhino_ping`** reaches the Rook plug-in running inside Rhino. When Rhino starts
+  with Rook loaded, the plug-in writes a small discovery file to
+  `%LOCALAPPDATA%\Rook\discovery\`; that is how your assistant finds it.
+- **`rhino_document`** proves Rook can read your live model.
+- **`gh_status`** checks the Grasshopper side, which Rook reaches through a separate
+  companion plug-in. It can fail on its own even when Rhino passes.
+- **The skills** come from the Rook plugin in Claude, and from the installer in
+  ChatGPT. The tools work without them; the skills add the guided workflows. See
+  [Skills That Ship](/rook-release/plugin/skills/).
+
+For a deeper end-to-end test that creates and removes a test object, see
+[Post-Install Agent Setup](/rook-release/start/agent-post-install/).
 
 ## Next
 
 Once everything passes, head to
-[Your First Conversation](/rook-release/start/first-conversation/) — or skim the
-[Skills That Ship](/rook-release/plugin/skills/) to see what you can ask for.
+[Your First Conversation](/rook-release/start/first-conversation/).

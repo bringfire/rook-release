@@ -1,13 +1,14 @@
 ---
 title: Install Rook
-description: Get Rook running in Rhino and connected to your AI assistant.
+description: Install Rook and connect it to Claude or ChatGPT — no terminal, no Git, no config files.
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Getting set up is a one-time thing. Afterwards, you just talk to your assistant.
+Getting set up is a one-time thing, and you never need to open a terminal, install
+Git, or edit a settings file. Afterwards, you just talk to your assistant.
 
 <div class="rook-download-wrap">
   <a class="rook-download" href="https://github.com/bringfire/rook-release/releases/download/v1.6.1/Rook-Setup-1.6.1.exe" download>
@@ -19,87 +20,130 @@ Getting set up is a one-time thing. Afterwards, you just talk to your assistant.
 ## What you'll need
 
 - **Windows** with **Rhino 8**
-- An **AI assistant that supports MCP** — **Claude Code** (CLI, desktop, or VS Code
-  extension), **Codex**, or another MCP-capable client (Cursor, Windsurf)
-- An account or API key for the AI model you want to use (Claude, GPT, or a local
-  model via Ollama / LM Studio)
+- One of these desktop apps, signed in:
+  - **[Claude](https://claude.ai/download)**, the desktop app. Rook works in its
+    Chat, Cowork, and Code tabs.
+  - **[ChatGPT](https://learn.chatgpt.com/docs/windows/windows-app)**, the desktop app
+    that now includes Codex. Install it from that page, or search the Microsoft Store
+    for the ID `9PLM9XGG6VKS`; a plain name search can find unrelated apps.
 
-You do **not** need to install Python. The Rook installer includes and configures
-the local runtime it needs.
+Install and open your AI app **before** you run the Rook installer, because the
+installer connects Rook to the apps it finds. If you add an app later, run the Rook
+installer again.
 
-You don't need to be a programmer, and you don't need to know any Rhino commands.
+You do **not** need Python, Git, Node.js, or any command-line tools. The Rook
+installer includes everything it runs.
 
-## Step 1 — Install Rook (the Rhino plug-in)
+## Step 1 — Run the installer
 
 <Steps>
 
-1. Download the installer directly —
-   **[Rook-Setup-1.6.1.exe](https://github.com/bringfire/rook-release/releases/download/v1.6.1/Rook-Setup-1.6.1.exe)** —
-   or open the [v1.6.1 release page](https://github.com/bringfire/rook-release/releases/tag/v1.6.1)
-   for the SHA-256 checksum and the FFmpeg and OCCT source bundles. You can always grab the
-   newest build from the [latest release](https://github.com/bringfire/rook-release/releases/latest).
+1. Download **[Rook-Setup-1.6.1.exe](https://github.com/bringfire/rook-release/releases/download/v1.6.1/Rook-Setup-1.6.1.exe)**.
+   The [release page](https://github.com/bringfire/rook-release/releases/tag/v1.6.1)
+   lists its SHA-256 checksum and the FFmpeg and OCCT source bundles.
 
-2. Run it. The installer adds Rook to Rhino and Grasshopper and sets up the local
-   MCP server.
+2. Close Rhino, then run the installer. On the components page, keep these ticked
+   for the apps you use: **Claude Code / Claude Desktop MCP configuration** for
+   Claude, and **OpenAI Codex CLI MCP configuration + curated skills** for ChatGPT.
+   That is what connects Rook to them, so there is nothing to set up in the apps
+   themselves.
+   {/* screenshot: installer components page with Claude and Codex ticked */}
 
-3. Start (or restart) Rhino. Rook loads automatically.
+3. Let it finish. The last step takes a few minutes while it prepares Rook's
+   runtime.
 
 </Steps>
 
-After installing or updating Rook, restart your AI assistant too. Long-running
-Claude, Codex, Cursor, or Windsurf sessions can keep stale MCP state until they
-are restarted.
+## Step 2 — Start Rhino, then restart your app
 
-Curious what Rook runs and reaches on your machine? See
-[What Rook Touches](/rook-release/deeper/what-rook-touches/).
+<Steps>
 
-:::tip[Do not skip the post-install agent check]
-After Rhino restarts, open the
-[Post-Install Agent Setup](/rook-release/start/agent-post-install/) page and paste
-the prompt there into your assistant. It verifies the MCP server, live Rhino
-bridge, safe geometry round-trip, optional Grasshopper control, and skill setup,
-then helps resolve any last-mile client or plugin configuration issues.
+1. Start **Rhino 8** from the Start menu as usual, and open **Grasshopper** if you
+   plan to use it. Start Rhino yourself rather than asking your assistant to
+   launch it.
+
+2. **Fully quit** your AI app and open it again, so it loads the new connection.
+   Closing the window is not always enough.
+
+   <Tabs syncKey="assistant-app">
+     <TabItem label="Claude">
+       Right-click the **Claude** icon in the notification area (near the clock) and
+       choose **Quit**, then open Claude again.
+       {/* screenshot: Claude tray icon menu with Quit */}
+     </TabItem>
+     <TabItem label="ChatGPT">
+       Quit the **ChatGPT** app completely, then open it again. If its icon stays in
+       the notification area after you close the window, right-click it and choose
+       **Quit**.
+     </TabItem>
+   </Tabs>
+
+</Steps>
+
+## Step 3 — Add Rook's skills
+
+Skills are Rook's guided workflows, for example building a Grasshopper definition
+step by step, or creating Chirp components.
+
+<Tabs syncKey="assistant-app">
+  <TabItem label="Claude">
+    <Steps>
+
+    1. In Claude, open **Customize → Plugins**, then choose **Add → Add marketplace**.
+       {/* screenshot: Customize → Plugins with the Add menu open */}
+
+    2. Type `bringfire/rook-release` and select **Sync**. Claude shows a red notice
+       asking you to trust plugins from marketplaces; that is standard for any
+       plugin that isn't in Anthropic's directory. If it says **Failed to add
+       marketplace**, select **Sync** again.
+       {/* screenshot: Add marketplace dialog with bringfire/rook-release */}
+
+    3. Open **Rook** from the list and select **Add**. Its page shows **9 skills**.
+       {/* screenshot: the Rook plugin page, toggle on, 9 skills */}
+
+    </Steps>
+
+    The plugin is saved to your Claude account, so the skills appear in Chat, Cowork,
+    and the Code tab without installing anything again.
+  </TabItem>
+  <TabItem label="ChatGPT">
+    Nothing to do. The installer already gave Codex the same nine Rook skills.
+  </TabItem>
+</Tabs>
+
+## Step 4 — Check that it works
+
+Open a **new conversation** and paste this. It only reads from Rhino; it changes
+nothing.
+
+:::tip[Paste this to your assistant]
+```text
+Rook connection check. Use only the Rook tools (Rhino/Grasshopper MCP), never any screen-control, computer-use or Windows-control tool, and change nothing.
+1. Call rhino_ping and report the result.
+2. Call rhino_document and report the document name and object count.
+3. Call gh_status and report whether Grasshopper is available.
+4. List any Rook skills you have (from plugins or skills), by name, or say "none".
+Report each step as PASS or FAIL, with the exact error text for any failure.
+```
 :::
 
-## Step 2 — Connect your assistant
+Every step should say **PASS**, and step 4 should list nine skills such as
+`execute-grasshopper` and `chirp`. The first call can take a few seconds while the
+assistant finds Rook's tools.
 
-Rook talks to your AI assistant through **MCP** — the doorway that lets your
-assistant reach into Rhino. You point your assistant at Rook once.
+Your app may ask permission before each Rook tool, depending on the app and its
+approval setting. When the request names `rhino_ping`, `rhino_document`, or
+`gh_status`, you can choose **Always allow**: those three only read. If it asks
+about `rook_tools_call` instead, choose **Allow once**. That one tool can run any
+Rook tool, including ones that change or delete. See
+[Choosing approvals](/rook-release/start/setup-verify/#choosing-approvals).
+{/* screenshot: the approval prompt with Allow once / Always allow / Deny */}
 
-<Steps>
+If a step fails, see [Set Up & Verify](/rook-release/start/setup-verify/) for a
+troubleshooting prompt your assistant can run for you.
 
-1. Open your assistant's settings and find where it lists **MCP servers**.
-
-2. Add **Rook** (the installer registers it for Claude Code, Claude Desktop, and
-   Codex automatically; you mostly just enable it).
-
-3. Tell your assistant which AI model and key to use, if it asks.
-
-</Steps>
-
-See [Claude Code & Desktop](/rook-release/plugin/claude/) and
-[Codex & Other Clients](/rook-release/plugin/codex/) for per-client details.
-
-## Step 3 — Add the Rook plugin (Claude Code)
-
-To get the `/` skills and the session hook in **Claude Code**, add the marketplace plugin:
-
-```text
-/plugin marketplace add bringfire/rook-release
-/plugin install rook@rook
-```
-
-This provides the `/` skills + the session hook **for Claude Code**.
-
-**Codex users:** the curated skills are installed for you by the installer — no extra step.
-
-## Step 4 — Verify
-
-Hand your agent the
-[Post-Install Agent Setup](/rook-release/start/agent-post-install/) page. It is
-the recommended end-to-end verification prompt after a fresh installer run.
-
-For a shorter explanation of what each check means, see
-[Set Up & Verify](/rook-release/start/setup-verify/).
+Curious what Rook runs and reaches on your machine? See
+[What Rook Touches](/rook-release/deeper/what-rook-touches/). Prefer the command
+line? See [Command Line & Manual Setup](/rook-release/deeper/manual-setup/).
 
 → Next: [Your First Conversation](/rook-release/start/first-conversation/)

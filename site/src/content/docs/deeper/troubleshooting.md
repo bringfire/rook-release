@@ -9,12 +9,14 @@ Most problems are quick to fix. Here are the common ones.
 
 ## My assistant doesn't see Rook
 
-Your assistant needs Rook enabled as an MCP connection. Open its settings, check
-that Rook is listed and turned on, then restart the assistant. If you just
-installed, make sure Rhino has been started at least once so the plugin is loaded.
+The Rook installer connects Rook to Claude and the ChatGPT desktop app. After every
+Rook install or update, **fully quit** your app (from its icon near the clock, not
+just the window) and reopen it. If Rook still doesn't appear, the app may have been
+installed after Rook: run the Rook installer again.
 
-After every Rook install, update, or repair, restart Claude, Codex, Cursor,
-Windsurf, or whichever MCP client you are using before judging the install.
+For a step-by-step diagnosis, paste the
+[troubleshooting prompt](/rook-release/start/setup-verify/#3-if-something-fails)
+into your assistant. It reads Rook's logs and tells you what to fix.
 
 ## Rook isn't responding / everything hangs
 

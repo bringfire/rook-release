@@ -1,19 +1,23 @@
 ---
 title: Skills That Ship
-description: The guided workflows Rook adds to Claude Code — what each does and how to invoke it.
+description: The guided workflows Rook adds to Claude and ChatGPT — what each does and how to invoke it.
 sidebar:
   order: 2
 ---
 
-Skills are guided workflows you trigger with `/`. They orchestrate Rook's tools
-into multi-step processes — designing a Grasshopper definition, creating Chirp
-components, or organizing a file. Rook ships **9** of them.
+Skills are guided workflows. They orchestrate Rook's tools into multi-step
+processes: designing a Grasshopper definition, creating Chirp components, or
+organizing a file. Rook ships **9** of them.
+
+You don't need to name a skill: describe the task and your assistant picks the
+matching one. To choose one yourself, type `/` in Claude and pick it from the menu
+(Rook's skills show a `rook:` prefix), or mention it by name in ChatGPT.
 
 :::note
-Skills reach **Claude Code** via the marketplace plugin (`/plugin marketplace add bringfire/rook-release`
-→ `/plugin install rook@rook`). **Codex CLI** gets the same curated 9 user skills
-installed by the installer (`~/.codex/skills`). Other MCP clients get the tools but
-not the skills. See [Plugin Overview](/rook-release/plugin/overview/).
+**Claude** gets the skills from the Rook plugin (**Customize → Plugins → Add
+marketplace** → `bringfire/rook-release`), in Chat, Cowork, and the Code tab.
+**ChatGPT** gets the same nine from the Rook installer. Other MCP clients get the
+tools but not the skills. See [Plugin Overview](/rook-release/plugin/overview/).
 :::
 
 ## Grasshopper — routed design, planning, and execution

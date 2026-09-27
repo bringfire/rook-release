@@ -15,9 +15,9 @@ giving you a hundred-odd providers, local or cloud.
 
 | Client | Support |
 |--------|---------|
-| **Claude Code** | Recommended · full feature set |
-| **Claude Desktop** | Fully supported |
-| **Codex Desktop** | Fully supported |
+| **Claude** desktop app (Chat, Cowork, Code) | Recommended · tools + skills |
+| **ChatGPT** desktop app (Codex) | Fully supported · tools + skills |
+| **Claude Code** command line | Tools + skills |
 | **Cursor** | MCP tools |
 | **Windsurf** | MCP tools |
 | **Ollama** | Local · agent backend |
