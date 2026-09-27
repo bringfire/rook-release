@@ -11,7 +11,7 @@
     {
       "name": "rook",
       "source": "./",
-      "description": "Rook — an MCP bridge for Rhino 3D and Grasshopper, with skills and hooks for designing and building parametric definitions and LLM-powered components.",
+      "description": "Rook — an MCP bridge for Rhino 3D and Grasshopper, with skills for designing and building parametric definitions and LLM-powered components.",
       "version": "1.6.1",
       "author": {
         "name": "bringfire"

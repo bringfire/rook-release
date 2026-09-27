@@ -40,7 +40,7 @@ Full, step-by-step instructions: **https://bringfire.github.io/rook-release/star
 
 ## The Claude Code plugin
 
-Rook also ships as a Claude Code plugin (guided skills + a session hook). After
+Rook also ships as a Claude Code plugin (guided skills). After
 installing, you can manage it via the marketplace:
 
 ```
