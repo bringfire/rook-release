@@ -1,62 +1,46 @@
 ---
-title: Codex & Other Clients
-description: Setting up Rook with Codex CLI, Cursor, Windsurf, and other MCP clients.
+title: ChatGPT & Other Clients
+description: Using Rook in the ChatGPT desktop app (with Codex), and in other MCP clients.
 sidebar:
   order: 4
 ---
 
-Codex and other MCP clients use Rook's MCP tools. The curated skill workflow ships to Claude Code via the marketplace plugin and to Codex via the installer (the same 9 user skills). Maintainer/dev-only skills ship to neither client.
+## ChatGPT desktop app (Codex)
 
-| Client | MCP tools | Skills | Session hook |
-|--------|:---------:|:------:|:------------:|
-| **Codex CLI** | ✅ | ✅ (curated, 11; installer-delivered) | — |
-| **Cursor** | ✅ | — | — |
-| **Windsurf** | ✅ | — | — |
-| **Any MCP client** | ✅ | — | — |
+The Codex app is now part of the **ChatGPT desktop app** for Windows. Install it from
+[OpenAI's Windows page](https://learn.chatgpt.com/docs/windows/windows-app), or
+search the Microsoft Store for the ID `9PLM9XGG6VKS`; a plain name search can find
+unrelated apps.
 
-Hooks and Claude Code plugins remain Claude-only.
+The Rook installer sets everything up, with nothing to type:
 
-## Codex CLI
+- It connects Rook to Codex.
+- It installs the same nine Rook skills that Claude gets from the plugin.
+- It adds Rook's operating guidance (an `AGENTS.md` file).
 
-### The easy path
-Run the Rook installer — it sets up the Rhino plug-ins, the local MCP server,
-generates a user-level `~/.codex/config.toml`, and copies the curated 11 user
-skills to `~/.codex/skills`. It also installs `AGENTS.md` with Rook's operating
-guidance. No extra step needed for skills. See
-[Install Rook](/rook-release/start/install/).
+After installing or updating Rook, quit the ChatGPT app completely and reopen it.
+Then check it with the prompts on [Set Up & Verify](/rook-release/start/setup-verify/),
+in a new conversation. You don't need to open a project folder.
 
-### Manual configuration
-Add this to `~/.codex/config.toml`:
+### Approvals
 
-```toml
-[mcp_servers.rook]
-command = "<path-to-python>"
-args = ["-m", "rook"]
-cwd = "<path-to-mcp_server-directory>"
+ChatGPT asks how its actions should be approved:
 
-[mcp_servers.rook.env]
-PYTHONPATH = ""
-PYTHONHOME = ""
-ROOK_INSTALL_ROOT = "<install-root>"
-ROOK_DATA_DIR = "<data-directory>"
-ROOK_MODE = "release"
-```
+- **Ask for approval** (the default) asks before each Rook tool is used. Start here.
+- **Approve for me** only asks about actions it detects as potentially unsafe.
+- **Full access** never asks. Use it only if you understand what that allows.
 
-Use the same placeholder values as the
-[Claude Code release table](/rook-release/plugin/claude/#manual-mcp-configuration).
+See [Choosing approvals](/rook-release/start/setup-verify/#choosing-approvals).
 
-Codex also reads an `AGENTS.md` file (the Codex counterpart to `CLAUDE.md`),
-installed to `%LOCALAPPDATA%\Rook\AGENTS.md`, which carries Rook's operating
-guidance.
+## Cursor, Windsurf, and other MCP clients
 
-## Cursor, Windsurf & others
+Other apps that support MCP can use Rook's tools, but not its skills. They need Rook
+added to their MCP settings by hand; see
+[Command Line & Manual Setup](/rook-release/deeper/manual-setup/) for the exact
+entry.
 
-These clients support MCP servers. Add Rook using the same stdio command, args,
-`cwd`, and `env` shown above, in the client's MCP configuration. You'll get the
-full tool set; skills and hooks won't be available.
-
-## Verify
-
-Whatever the client, hand your agent the
-[Set Up & Verify](/rook-release/start/setup-verify/) page — the MCP and Rhino checks work
-everywhere. (The skills check only applies to Claude Code and Codex.)
+| App | Rook's tools | Rook's skills | Setup |
+|---|:---:|:---:|---|
+| **Claude** (Chat, Cowork, Code) | ✅ | ✅ | Installer + plugin, no terminal. See [Claude](/rook-release/plugin/claude/) |
+| **ChatGPT desktop app** (Codex) | ✅ | ✅ | Installer, no terminal |
+| **Cursor, Windsurf, others** | ✅ | — | Manual MCP entry |

@@ -66,8 +66,8 @@ export default defineConfig({
           items: [
             { label: 'Plugin Overview', slug: 'plugin/overview' },
             { label: 'Skills That Ship', slug: 'plugin/skills' },
-            { label: 'Claude Code & Desktop', slug: 'plugin/claude' },
-            { label: 'Codex & Other Clients', slug: 'plugin/codex' },
+            { label: 'Claude', slug: 'plugin/claude' },
+            { label: 'ChatGPT & Other Clients', slug: 'plugin/codex' },
           ],
         },
         {
@@ -126,6 +126,7 @@ export default defineConfig({
             { label: 'Under the Hood', slug: 'deeper/under-the-hood' },
             { label: 'What Rook Touches', slug: 'deeper/what-rook-touches' },
             { label: 'Troubleshooting', slug: 'deeper/troubleshooting' },
+            { label: 'Command Line & Manual Setup', slug: 'deeper/manual-setup' },
           ],
         },
         {

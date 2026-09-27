@@ -27,26 +27,26 @@ stage you're in, and it's flexible enough that you decide what that help looks
 like: heavy geometry and analysis, Python/C# Grasshopper scripts, layer and block
 management, document-level operations, visualization, and more.
 
-Works with any MCP-capable assistant (Claude Code, Codex, and others) and any
-model provider (Claude, GPT, or local models) — **bring your own key**.
+Works with the Claude and ChatGPT desktop apps, and other MCP-capable assistants,
+with any model provider (Claude, GPT, or local models): **bring your own key**.
 
 ## Install
 
-1. Download the installer — [Rook-Setup-1.6.1.exe](https://github.com/bringfire/rook-release/releases/download/v1.6.1/Rook-Setup-1.6.1.exe) — or the [latest release](https://github.com/bringfire/rook-release/releases/latest).
-2. Run it — it adds Rook to Rhino and Grasshopper and sets up the MCP server.
-3. Start Rhino, connect your AI assistant, and say hello.
+No terminal, Git, or config files needed.
+
+1. Install the **Claude** or **ChatGPT** desktop app first.
+2. Download and run the installer: [Rook-Setup-1.6.1.exe](https://github.com/bringfire/rook-release/releases/download/v1.6.1/Rook-Setup-1.6.1.exe), or the [latest release](https://github.com/bringfire/rook-release/releases/latest). It adds Rook to Rhino and Grasshopper and connects it to your app.
+3. Start Rhino, fully quit and reopen your app, and paste the connection check from the docs.
 
 Full, step-by-step instructions: **https://bringfire.github.io/rook-release/start/install/**
 
-## The Claude Code plugin
+## Rook's skills in Claude
 
-Rook also ships as a Claude Code plugin (guided skills). After
-installing, you can manage it via the marketplace:
-
-```
-/plugin marketplace add bringfire/rook-release
-/plugin install rook@rook
-```
+In the Claude desktop app, open **Customize → Plugins → Add → Add marketplace**,
+enter `bringfire/rook-release`, and add **Rook**. The skills then appear in Chat,
+Cowork, and the Code tab. The ChatGPT app gets the same skills from the installer.
+Command-line users can run `/plugin marketplace add bringfire/rook-release` and
+`/plugin install rook@rook` in Claude Code.
 
 ## Privacy
 

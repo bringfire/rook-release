@@ -1,89 +1,35 @@
 ---
 title: Post-Install Agent Setup
-description: After installing Rook, paste the prompt for your assistant — it verifies the connection, runs a safe smoke test, sets up skills, cleans up, and reports.
+description: A deeper end-to-end test for Claude or ChatGPT — it creates one test object in Rhino, checks it, removes it, and reports.
 sidebar:
   order: 4
 ---
 
-After installing Rook and restarting Rhino, paste the prompt below into your AI
-assistant. It will run through each check in order, clean up the test geometry, and
-give you a concise PASS/FAIL report — so you know the full stack is healthy before
-you start working.
+The [connection check](/rook-release/start/setup-verify/) only reads from Rhino.
+This test goes one step further: it creates a small test sphere, confirms it
+exists, then deletes it, which proves Rook can change your model as well as read
+it. It works the same in Claude and in the ChatGPT desktop app.
 
-:::tip[Paste this to Claude Code]
+Run it in an empty or saved model. Your app will ask before the create and delete
+steps; choose **Allow once** for those (see
+[Choosing approvals](/rook-release/start/setup-verify/#choosing-approvals)).
+
+:::tip[Paste this to your assistant]
 ```text
-You're helping me finish setting up Rook (the Rhino + Grasshopper plugin) right
-after installing it. Run these checks in order, then clean up and report. Don't
-mark a step PASS without showing me the tool output.
-
-1. MCP connection — confirm the Rook tools are available (rhino_ping, gh_status). If
-   your client can't list MCP servers, just try calling rhino_ping. If no rook tools
-   exist at all, the config isn't registered (the installer writes it; I may just
-   need to restart you). A small tool count is not a failure on its own — some
-   profiles advertise a compact set.
-2. Rhino — make sure Rhino 8 is running, then call rhino_ping; expect "pong", then
-   call rhino_sessions and confirm exactly one instance is bound. If ping fails:
-   Rhino isn't running; the RookNative plugin didn't load (I can run ShowRookChat in
-   Rhino to check); or the discovery file is stale — restarting Rhino rewrites it.
-   If it HANGS rather than failing, Rhino is showing a modal dialog — tell me to
-   switch to the Rhino window and dismiss it. Don't use keyboard automation.
-3. Geometry round-trip — call rhino_document first and tell me the units and object
-   count, and warn me if the document already has work in it. Then create a red
-   sphere at the origin, radius 5 in document units, and list the document objects
-   to confirm it exists.
-4. Grasshopper — call gh_status. If it comes back available: false saying the
-   Grasshopper assembly isn't loaded, that only means Grasshopper isn't open — ask
-   me to open it and retry rather than marking this FAILED. Once it reports
-   available, tell me the version and canvas state and take a canvas snapshot.
-5. Skills — confirm the Rook skills are available (e.g. /design-grasshopper,
-   /execute-grasshopper, /chirp). If they're missing and you can run slash commands, install the
-   plugin (otherwise ask me to run these):
-       /plugin marketplace add bringfire/rook-release
-       /plugin install rook@rook
-   then confirm the 9 skills appear.
-6. Clean up — delete the test sphere you created (and any test layer), then confirm
-   the object count matches what you reported in step 3, so my document is left
-   exactly as it was.
-7. Report — a short PASS/FAIL for each step; for any FAIL, the most likely cause and
-   fix.
+You're helping me finish setting up Rook (the Rhino + Grasshopper plugin). Run these checks in order, then clean up and report. Use only the Rook tools; never use any screen-control, computer-use or Windows-control tool. Don't mark a step PASS without showing me the tool output.
+1. Connection: call rhino_ping and expect "pong". If it fails, Rhino may not be running, or Rook may not have loaded in it (I can type ShowRookChat in Rhino to check). If the call hangs, Rhino is showing a dialog: tell me to switch to Rhino and close it.
+2. Rhino sessions: call rhino_sessions and confirm exactly one Rhino window is available.
+3. Before touching anything: call rhino_document and tell me the units and object count. Warn me if the model already has work in it, and wait for my go-ahead if it does.
+4. Round trip: create a red sphere at the origin with radius 5 (document units), then list the objects to confirm it exists. Note the new object's ID.
+5. Grasshopper: call gh_status. If Grasshopper isn't open, ask me to open it and try again instead of marking this FAILED. Once it's available, report its version and take a canvas snapshot with gh_snapshot.
+6. Skills: list the Rook skills you have. I expect nine: capture-convention, chirp, chirp-cascade, clean-layers, design-grasshopper, execute-grasshopper, plan-grasshopper, project-setup, twisted-column. If they're missing, don't try to install anything; tell me which step on the Rook install page adds them for my app.
+7. Clean up: delete only the sphere you created, by its ID, and confirm the object count is back to the number from step 3.
+8. Report: a short PASS/FAIL for each step, and for any FAIL, the most likely cause and the fix in plain words, without asking me to use a terminal.
 ```
 :::
 
-:::tip[Paste this to Codex]
-```text
-You're helping me finish setting up Rook (the Rhino + Grasshopper plugin) right
-after installing it. Run these checks in order, then clean up and report. Don't
-mark a step PASS without showing me the tool output.
+If anything fails, the
+[troubleshooting prompt](/rook-release/start/setup-verify/#3-if-something-fails)
+reads Rook's logs and tells you what to fix.
 
-1. MCP connection — confirm the Rook tools are available (rhino_ping, gh_status). If
-   your client can't list MCP servers, just try calling rhino_ping. If no rook tools
-   exist at all, the config isn't registered (the installer writes it; I may just
-   need to restart you). A small tool count is not a failure on its own — some
-   profiles advertise a compact set.
-2. Rhino — make sure Rhino 8 is running, then call rhino_ping; expect "pong", then
-   call rhino_sessions and confirm exactly one instance is bound. If ping fails:
-   Rhino isn't running; the RookNative plugin didn't load (I can run ShowRookChat in
-   Rhino to check); or the discovery file is stale — restarting Rhino rewrites it.
-   If it HANGS rather than failing, Rhino is showing a modal dialog — tell me to
-   switch to the Rhino window and dismiss it. Don't use keyboard automation.
-3. Geometry round-trip — call rhino_document first and tell me the units and object
-   count, and warn me if the document already has work in it. Then create a red
-   sphere at the origin, radius 5 in document units, and list the document objects
-   to confirm it exists.
-4. Grasshopper — call gh_status. If it comes back available: false saying the
-   Grasshopper assembly isn't loaded, that only means Grasshopper isn't open — ask
-   me to open it and retry rather than marking this FAILED. Once it reports
-   available, tell me the version and canvas state and take a canvas snapshot.
-5. Skills — confirm the curated Rook skills are installed (under ~/.codex/skills)
-   and that AGENTS.md guidance is present. You should have the 9 user skills:
-   design-grasshopper, plan-grasshopper, execute-grasshopper, chirp, chirp-cascade,
-   capture-convention, clean-layers, project-setup, twisted-column. If any are missing,
-   tell me to re-run the Rook installer with
-   Codex support.
-6. Clean up — delete the test sphere you created (and any test layer), then confirm
-   the object count matches what you reported in step 3, so my document is left
-   exactly as it was.
-7. Report — a short PASS/FAIL for each step; for any FAIL, the most likely cause and
-   fix.
-```
-:::
+→ Next: [Your First Conversation](/rook-release/start/first-conversation/)

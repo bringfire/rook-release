@@ -1,89 +1,55 @@
 ---
-title: Claude Code & Desktop
-description: Setting up Rook with Claude Code — the client that gets the full feature set.
+title: Claude
+description: Using Rook in the Claude desktop app — Chat, Cowork, and the Code tab — with no terminal.
 sidebar:
   order: 3
 ---
 
-**Claude Code is the recommended client** — and the only one that gets *everything*:
-MCP tools, skills, and hooks.
+Rook works in all three tabs of the **[Claude desktop app](https://claude.ai/download)**:
+**Chat**, **Cowork**, and **Code**. You set it up once, without a terminal.
 
-:::caution[Claude Code ≠ the old Claude Desktop chat app]
-"Claude Code" (the [CLI](https://code.claude.com/docs/en/overview),
-[Desktop app](https://code.claude.com/docs/en/desktop), or
-[VS Code extension](https://code.claude.com/docs/en/vs-code)) supports plugins,
-skills, and hooks — the full Rook experience.
+| | Rook's tools | Rook's skills | Asks before using a tool |
+|---|:---:|:---:|---|
+| **Chat** | ✅ | ✅ | Yes: Allow once, Always allow (per tool), or Deny |
+| **Cowork** (tasks on your computer) | ✅ | ✅ | No |
+| **Code** tab | ✅ | ✅ | Follows the Code tab's permission mode |
 
-The older **claude.ai download** chat app supports *MCP servers only*. You'll get
-the tools but none of the skills or the session-start hook. If you're on that app,
-install [Claude Code](https://code.claude.com/docs/en/desktop-quickstart) instead.
-:::
+## How it's set up
 
-## The easy path
+1. **The Rook installer connects Rook to Claude.** It registers Rook in Claude's
+   settings, and all three tabs share that one connection. Install Claude before
+   Rook; if you install Claude later, run the Rook installer again.
+2. **You add the skills from Claude itself:** **Customize → Plugins → Add → Add
+   marketplace**, type `bringfire/rook-release`, select **Sync**, then add **Rook**.
+   The plugin is saved to your Claude account, so the skills appear in Chat, Cowork,
+   and the Code tab.
 
-There are two steps:
+[Install Rook](/rook-release/start/install/) walks through both, and
+[Set Up & Verify](/rook-release/start/setup-verify/) has the prompts that check
+them.
 
-1. **Run the Rook installer** ([Install Rook](/rook-release/start/install/)). It sets up the
-   Rhino plug-ins and the local MCP server, and registers the MCP server for Claude Code
-   automatically. Restart Rhino after this step.
+## Good to know
 
-2. **Add the marketplace plugin** to get the skills and session-start hook in Claude Code:
+- **Fully quit Claude after installing or updating Rook.** Right-click the Claude
+  icon near the clock and choose **Quit**, then reopen it. Claude reads its
+  connections when it starts.
+- **Cowork doesn't ask before using Rook's tools.** Work on a saved copy of your
+  model; Rhino's **Undo** reverses model changes but not exported files. Rook works
+  in Cowork tasks that run on your computer, not in cloud sessions.
+- **The Code tab doesn't need Git** for ordinary sessions. Anthropic only requires
+  Git for worktree sessions.
+- **You never need screen-control extensions.** Rook works entirely through its own
+  tools, so don't turn on computer-use or "Windows control" extensions for it.
+- **Updates:** after a Rook release, the plugin updates from its marketplace. To
+  check now, open **Customize → Plugins → Rook** and choose **Check for updates**.
 
-:::tip[Paste this to your agent]
-```text
-/plugin marketplace add bringfire/rook-release
-/plugin install rook@rook
-```
-:::
+## To see Rook's tools in Claude
 
-This provides the `/` skills and the session hook. Then [verify](/rook-release/start/setup-verify/).
+In a Chat conversation, select **+** (Add files, connectors, and more) at the
+bottom left of the message box, then **Connectors → Manage connectors**. **rook**
+is listed there with its tools.
 
-## Loading the plugin manually
+## Command line
 
-If you need to re-add or update the plugin at any time:
-
-## Manual MCP configuration
-
-If you need to register the server by hand, add this to `~/.claude.json` under
-`mcpServers`:
-
-```json
-{
-  "mcpServers": {
-    "rook": {
-      "type": "stdio",
-      "command": "<path-to-python>",
-      "args": ["-m", "rook"],
-      "cwd": "<path-to-mcp_server-directory>",
-      "env": {
-        "PYTHONPATH": "",
-        "PYTHONHOME": "",
-        "ROOK_INSTALL_ROOT": "<install-root>",
-        "ROOK_DATA_DIR": "<data-directory>",
-        "ROOK_MODE": "release"
-      }
-    }
-  }
-}
-```
-
-For a **release** install:
-
-| Placeholder | Value |
-|-------------|-------|
-| `<path-to-python>` | `%LOCALAPPDATA%\Rook\venv\Scripts\python.exe` |
-| `<path-to-mcp_server-directory>` | `%LOCALAPPDATA%\Rook\app\mcp_server` |
-| `<install-root>` | `%LOCALAPPDATA%\Rook\app` |
-| `<data-directory>` | `%LOCALAPPDATA%\Rook\data` |
-| `ROOK_MODE` | `release` |
-
-:::note
-The `env` block is **required**. Without `ROOK_INSTALL_ROOT` and `ROOK_DATA_DIR`,
-the server can't locate its data on a release install.
-:::
-
-Claude Desktop (the Claude Code desktop app) uses the same structure in its config.
-
-## Verify
-
-Hand your agent the [Set Up & Verify](/rook-release/start/setup-verify/) page.
+If you use the Claude Code command line instead of the desktop app, see
+[Command Line & Manual Setup](/rook-release/deeper/manual-setup/).

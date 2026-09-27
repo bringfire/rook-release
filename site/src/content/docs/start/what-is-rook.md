@@ -36,8 +36,8 @@ where you are in the process.
 ## The shift
 
 The old way to use Rhino is to learn it — hundreds of commands and options, built
-up over years. With Rook, you talk to an assistant you already use (Claude Desktop,
-Codex, or one inside your code editor) and *it* drives Rhino for you. You stay the
+up over years. With Rook, you talk to an assistant you already use (Claude or the
+ChatGPT desktop app) and *it* drives Rhino for you. You stay the
 designer and stay in the conversation; Rook handles the mechanics.
 
 > **You:** “Run a curvature analysis on these surfaces and flag anything too sharp,
@@ -84,8 +84,8 @@ users rely on. You get the benefit of that expertise without having to learn it.
 ## What you need
 
 - **Rhino 8** on **Windows**
-- An **AI assistant that supports MCP** — Claude Desktop, Codex, or an MCP-capable
-  assistant in your IDE
+- The **Claude** or **ChatGPT** desktop app (or another assistant that supports
+  MCP)
 - An account/key for whichever AI model you prefer — Claude, GPT, or a local model
 
 Ready? → [Install Rook](/rook-release/start/install/)
