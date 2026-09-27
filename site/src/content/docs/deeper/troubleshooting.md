@@ -11,8 +11,12 @@ Most problems are quick to fix. Here are the common ones.
 
 The Rook installer connects Rook to Claude and the ChatGPT desktop app. After every
 Rook install or update, **fully quit** your app (from its icon near the clock, not
-just the window) and reopen it. If Rook still doesn't appear, the app may have been
-installed after Rook: run the Rook installer again.
+just the window) and reopen it. If Rook still doesn't appear in Claude, Claude was
+probably installed after Rook. The installer connects Rook to Claude only when
+Claude is already installed, so run the Rook installer again, then fully quit and
+reopen Claude. (A tell-tale sign: Rook works in Claude's Code tab but not in Chat
+or Cowork.) The ChatGPT app is connected whether it's installed before or after
+Rook.
 
 For a step-by-step diagnosis, paste the
 [troubleshooting prompt](/rook-release/start/setup-verify/#3-if-something-fails)

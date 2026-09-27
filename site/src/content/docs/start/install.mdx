@@ -27,9 +27,16 @@ Git, or edit a settings file. Afterwards, you just talk to your assistant.
     that now includes Codex. Install it from that page, or search the Microsoft Store
     for the ID `9PLM9XGG6VKS`; a plain name search can find unrelated apps.
 
-Install and open your AI app **before** you run the Rook installer, because the
-installer connects Rook to the apps it finds. If you add an app later, run the Rook
-installer again.
+Install **Claude** and open it once **before** you run the Rook installer: the
+installer connects Rook to Claude only if Claude is already installed. The ChatGPT
+app can be installed before or after Rook.
+
+:::note[Installed Claude after Rook?]
+Rook then won't appear in Claude's Chat or Cowork, though it may already work in
+the Code tab. Run the Rook installer again, then fully quit Claude (from its icon
+near the clock) and reopen it. You don't need to uninstall anything or edit any
+files.
+:::
 
 You do **not** need Python, Git, Node.js, or any command-line tools. The Rook
 installer includes everything it runs.
