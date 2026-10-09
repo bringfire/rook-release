@@ -42,7 +42,12 @@ export default defineConfig({
       social: [
         {
           icon: 'github',
-          label: 'GitHub',
+          label: 'Source code',
+          href: 'https://github.com/bringfire/Rook',
+        },
+        {
+          icon: 'github',
+          label: 'Releases & docs',
           href: 'https://github.com/bringfire/rook-release',
         },
       ],
@@ -124,6 +129,7 @@ export default defineConfig({
           label: 'Going Deeper',
           items: [
             { label: 'Under the Hood', slug: 'deeper/under-the-hood' },
+            { label: 'Source code (GitHub)', link: 'https://github.com/bringfire/Rook' },
             { label: 'What Rook Touches', slug: 'deeper/what-rook-touches' },
             { label: 'Troubleshooting', slug: 'deeper/troubleshooting' },
             { label: 'Command Line & Manual Setup', slug: 'deeper/manual-setup' },
