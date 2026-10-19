@@ -36,7 +36,8 @@ through.
 The only thing Rook reaches out to is **the AI model provider you configure** — for
 example Anthropic (Claude), OpenAI (GPT), Google, or a local model through Ollama or
 LM Studio. Those requests go **directly from your device to that provider, using your
-own API key**. Rook does not relay them through any server of ours.
+own API key** (or, for Google Enterprise, your organization's Google Cloud sign-in).
+Rook does not relay them through any server of ours.
 
 Everything else — your Rhino files, your prompts, the geometry and images Rook
 produces, and the knowledge it builds up as you work — **stays on your device.** (See

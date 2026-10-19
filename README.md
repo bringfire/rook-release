@@ -15,7 +15,7 @@
 ---
 
 - 📖 **Documentation** — https://bringfire.github.io/rook-release/
-- ⬇️ **Download** — **[Rook-Setup-1.6.1.exe](https://github.com/bringfire/rook-release/releases/download/v1.6.1/Rook-Setup-1.6.1.exe)** (direct) · [latest release](https://github.com/bringfire/rook-release/releases/latest) · [all releases](https://github.com/bringfire/rook-release/releases)
+- ⬇️ **Download** — **[Rook-Setup-1.7.0.exe](https://github.com/bringfire/rook-release/releases/download/v1.7.0/Rook-Setup-1.7.0.exe)** (direct) · [latest release](https://github.com/bringfire/rook-release/releases/latest) · [all releases](https://github.com/bringfire/rook-release/releases)
 - 💬 **Support** — [Issues](https://github.com/bringfire/rook-release/issues) · bringfiregames@gmail.com
 
 ## What is Rook?
@@ -35,7 +35,7 @@ with any model provider (Claude, GPT, or local models): **bring your own key**.
 No terminal, Git, or config files needed.
 
 1. Install the **Claude** or **ChatGPT** desktop app first.
-2. Download and run the installer: [Rook-Setup-1.6.1.exe](https://github.com/bringfire/rook-release/releases/download/v1.6.1/Rook-Setup-1.6.1.exe), or the [latest release](https://github.com/bringfire/rook-release/releases/latest). It adds Rook to Rhino and Grasshopper and connects it to your app.
+2. Download and run the installer: [Rook-Setup-1.7.0.exe](https://github.com/bringfire/rook-release/releases/download/v1.7.0/Rook-Setup-1.7.0.exe), or the [latest release](https://github.com/bringfire/rook-release/releases/latest). It adds Rook to Rhino and Grasshopper and connects it to your app.
 3. Start Rhino, fully quit and reopen your app, and paste the connection check from the docs.
 
 Full, step-by-step instructions: **https://bringfire.github.io/rook-release/start/install/**

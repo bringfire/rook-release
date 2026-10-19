@@ -16,6 +16,7 @@ release.
 |----------|-----------|----------|---------|
 | **Gemini** (direct) | sync | image · text | per-token |
 | **Veo** (direct) | async | video | per-second |
+| **Google Enterprise** (Vertex AI) | sync · async | image · video | billed to your organization's Google Cloud project |
 | **fal.ai** (aggregator) | sync · queue | image · video · 3D | per-MP · per-call |
 | **Replicate** (aggregator) | prediction · poll | image · video · 3D | per-compute-sec |
 | **Tencent Hunyuan** (planned) | async | 3D generation | per-call · tiered |
@@ -38,7 +39,12 @@ adding a model is routine.
 ## Bring your own key
 
 BYOK throughout — one keyring, separate vaults. You use your own provider accounts;
-Rook just routes to them.
+Rook just routes to them. Google Enterprise is the exception to keys: you sign in
+to your organization's Google Cloud project instead.
+
+When Google is the primary provider for an image or video model, a stored fal.ai
+key acts as a fallback if the Google key is missing or rejected. See
+[RookVision](/rook-release/modules/rookvision/) for the exact rules.
 
 :::tip[Try it — paste to your agent]
 ```text
