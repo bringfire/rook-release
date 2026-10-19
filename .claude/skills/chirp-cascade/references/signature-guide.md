@@ -17,6 +17,22 @@ Geometry types (`Point3d`, `Curve`, `Brep`, etc.) are supported as pins but seri
 as `.ToString()` -- the LLM gets the type name, not useful geometry data. For geometry
 context, extract properties with traditional GH components and pass as numbers/strings.
 
+## Wiring Indices on the Canvas
+
+Chirp components are RhinoCode C# script components. In `gh_snapshot` their
+output index 0 is the script's `out` (stdout) stream, so every declared output
+pin is shifted by one, and the auto-added `Reasoning` pin is always the LAST
+output. `Correction` follows the declared inputs; LLM-backed components then
+add `Freeze` and `Frozen`, while deterministic-only components end with
+`Correction`. Example for a component with
+three declared outputs: `O0=out, O1..O3=declared, O4=Reasoning`. Take a
+snapshot and read the `idx` values before writing flow strings.
+
+While a Chirp component is solving it holds the Grasshopper thread for the
+duration of its LLM call, so an unrelated GH callback issued at that moment
+(such as `gh_create_script`) can time out. Let the cascade settle first, or
+expect to re-snapshot and clean up a half-configured component.
+
 ## Signature Syntax
 
 ```
