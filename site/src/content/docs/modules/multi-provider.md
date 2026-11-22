@@ -25,8 +25,8 @@ release.
 
 You don't have to wade through hundreds of models — Rook curates a working set:
 
-- **Image** — Nano Banana (Gemini) · Flux 2 Pro · GPT-Image-2 Edit
-- **Video** — Veo · Seedance 2.0 · Kling v3
+- **Image** — Nano Banana (Gemini) · Flux 2 Pro · GPT-Image-2 Edit · FLUX 2 (experimental)
+- **Video** — Veo · Seedance 2.0 · Kling v3 · PixVerse V6 (experimental)
 - **3D** — Hunyuan 3D 3.1 and mesh cleanup are planned roadmap lanes
 
 ## Built to absorb new models
