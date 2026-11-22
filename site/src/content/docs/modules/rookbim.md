@@ -27,6 +27,22 @@ slow. RookBIM lets you just ask:
 - **Selecting** — pull together a set to act on
 - **Coordination** — get a quick read on what a model contains
 
+## Changing the Revit model
+
+When Rhino runs inside Revit, an agent can also change the Revit model through a
+supported route:
+
+- **One named transaction** — the change runs as a Python script on Revit's API
+  thread inside a single named transaction. The agent waits for the result and gets
+  back the script's output, the transaction status, and the ids of the changed
+  elements.
+- **A receipt for every write** — each write leaves a receipt that can be read
+  later, even while Revit is busy.
+- **Document guard** — optionally, a write is refused if you have switched to
+  another Revit document since the agent last read it.
+- **Clear refusals** — if a dialog or command is active in Revit, RookBIM says that
+  Revit is not idle instead of failing without a reason.
+
 ## A collaborator on the data
 
 As with the rest of Rook, the point is to take the busywork off your hands —

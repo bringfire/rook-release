@@ -58,6 +58,22 @@ images, prompt enhancement, and Veo 3.1 video in two cases:
 A job Google has already accepted is never sent a second time. Video from
 reference images and Veo 2.0 / 3.0 have no fal.ai fallback.
 
+## More fal.ai models
+
+With a fal.ai key stored, RookVision also offers two models that run on fal.ai
+directly. Both are marked experimental and are text-only: they do not take a
+viewport or a source image.
+
+- **FLUX 2** (text to image) — image size, steps, guidance, acceleration, and
+  format.
+- **PixVerse V6** (text to video) — length, resolution, aspect ratio, audio,
+  negative prompt, style, and prompt optimization.
+
+Each model shows its own controls in the panel, and every job is quoted before it
+runs. FLUX 2 is quoted at up to USD 0.024 per image; PixVerse V6 is quoted per
+second, by resolution and audio. Agents get the same models, controls, and quotes
+through Rook's image and video tools.
+
 ## Status
 
 - Image — **live**
